@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       boxShadow: {
         'inner': 'inset 0 0 60px rgb(0 0 0 / 1)',
-        'player': '0 0 20px rgb(0 0 0 / .6)'
+        'player': '0 0 20px rgb(0 0 0 / .4)'
       },
       animation: {
         spinner: 'animateSpinner 0.2s linear'

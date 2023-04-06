@@ -2,16 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { searchAction, getAlbum } from "./api-actions";
 import { NameSpace, toastifyOptions } from "../../const";
-import { SearchData } from "../../types/search.data";
-import { AlbumData } from "../../types/search.album";
+import { SearchData } from "../../types/search-data.types";
+import { AlbumData } from "../../types/search-album.types";
 
 const initialState: {
   isLoading: boolean;
-  searhData: SearchData[];
+  searchData: SearchData[];
   albumData: AlbumData | null;
 } = {
   isLoading: false,
-  searhData: [],
+  searchData: [],
   albumData: null,
 };
 
@@ -26,7 +26,7 @@ export const dataSlice = createSlice({
       })
       .addCase(searchAction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.searhData = action.payload;
+        state.searchData = action.payload;
         state.albumData = null;
       })
       .addCase(searchAction.rejected, (state) => {

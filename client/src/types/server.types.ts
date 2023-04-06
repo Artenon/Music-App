@@ -1,6 +1,6 @@
 import { AuthStatus } from "../const";
-import { AlbumData } from "./search.album";
-import { SearchData } from "./search.data";
+import { AlbumData } from "./search-album.types";
+import { SearchData } from "./search-data.types";
 
 export type DefaultResponse = {
   message: string,

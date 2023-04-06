@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { HiPlay, HiPause } from "react-icons/hi";
-import { Track, AlbumData } from "../../types/search.album";
+import { Track, AlbumData } from "../../types/search-album.types";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import actions from "../../redux/track/track-slice";
+import { From } from "../../const";
 
-const { changeCurrentTrack, changeIsPlaying } = actions;
+const { changeCurrentTrack, changeIsPlaying, changeFrom, changePosition } = actions;
 
 type AlbumSongProps = {
   track: Track;
@@ -41,6 +42,8 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
         }
       }));
       dispatch(changeIsPlaying(true));
+      dispatch(changeFrom(From.Album));
+      dispatch(changePosition(index));
       setIsActive(true);
     }
   };
@@ -73,8 +76,8 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
           </div>
         </div>
         <div className="flex-col ml-4">
-          <p className="">{track.title}</p>
-          <p className={`text-gray-300/60 group-hover/song:text-black/60 ${isActive && "text-black/60"}`}>{album.artist.name}</p>
+          <p>{track.title}</p>
+          <p className={`${isActive ? "text-black/60" : "text-gray-300/60"} group-hover/song:text-black/60`}>{album.artist.name}</p>
         </div>
       </div>
     </div>

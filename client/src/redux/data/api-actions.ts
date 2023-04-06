@@ -2,9 +2,9 @@ import { AxiosInstance } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../types/store.types";
 import { SearchDataResponse, AlbumDataResponse } from "../../types/server.types";
-import { SearchData } from "../../types/search.data";
+import { SearchData } from "../../types/search-data.types";
 import { NameSpace, APIRoute } from "../../const";
-import { AlbumData } from "../../types/search.album";
+import { AlbumData } from "../../types/search-album.types";
 
 export const searchAction = createAsyncThunk<SearchData[], string, {
   dispatch: AppDispatch,

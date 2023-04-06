@@ -2,19 +2,20 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
-import { SearchData } from "../../types/search.data";
+import { SearchData } from "../../types/search-data.types";
 import actions from "../../redux/track/track-slice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
-import { AppRoute } from "../../const";
+import { AppRoute, From } from "../../const";
 
 type CardProps = {
   item: SearchData;
+  index: number;
 };
 
-const { changeCurrentTrack, changeIsPlaying } = actions;
+const { changeCurrentTrack, changeIsPlaying, changeFrom, changePosition } = actions;
 
-export const Card = ({item}: CardProps): JSX.Element => {
+export const Card = ({item, index}: CardProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -33,6 +34,8 @@ export const Card = ({item}: CardProps): JSX.Element => {
     } else {
       dispatch(changeCurrentTrack(item));
       dispatch(changeIsPlaying(true));
+      dispatch(changeFrom(From.Search));
+      dispatch(changePosition(index));
       setIsActive(true);
     };
   };
@@ -97,8 +100,8 @@ type CardsProps = {
 
 export const Cards = ({data}: CardsProps): JSX.Element => (
   <div className="flex flex-wrap pt-20 gap-4 pb-28 justify-center">
-    {data.map(item => (
-      <Card key={item.id} item={item} />
+    {data.map((item, index) => (
+      <Card key={item.id} item={item} index={index + 1} />
     ))}
   </div>
 );

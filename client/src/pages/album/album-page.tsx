@@ -25,8 +25,14 @@ export const AlbumPage = (): JSX.Element => {
   
   /* albumData.genres.data */
 
+  const date = new Date(Date.parse(albumData.release_date)).toLocaleString("en-US", {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
   return (
-    <div className="flex flex-col text-white p-8 pb-28">
+    <div className="flex flex-col text-white p-8 pb-24">
       <div className="flex items-end mb-8">
         <img src={albumData.cover_big} className="w-[400px] h-[400px] rounded-xl shadow-player" alt="cover" />
         <div className="flex flex-col text-xl font-bold ml-8">
@@ -46,10 +52,12 @@ export const AlbumPage = (): JSX.Element => {
       {
         albumData.tracks.map((track, index) => {
           return (
-            <AlbumSong key={track.id} track={track} index={index + 1} album={albumData}></AlbumSong>
+            <AlbumSong key={track.id} track={track} index={index + 1} album={albumData} />
           );
         })
       }
+
+      <div className="pt-4 text-gray-200/60">{date}</div>
     </div>
   );
 };

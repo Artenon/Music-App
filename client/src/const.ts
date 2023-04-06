@@ -32,3 +32,9 @@ export enum AuthStatus {
   Authorized = 'Authorized',
   Unauthorized = 'Unauthorized'
 };
+
+export enum From {
+  Search = 'Search',
+  Album = 'Album',
+  None = 'None'
+};
