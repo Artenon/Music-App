@@ -1,0 +1,111 @@
+input[type="range"] {
+  --range-progress: 0%;
+  --color: #fff;
+  appearance: none;
+  top: 0;
+  left: 2%;
+  background: transparent;
+  width: 96%;
+  height: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+input[type="range"]:hover {
+  height: 6px;
+  background:rgba(255, 255, 255, 0.1);
+}
+
+input[type="range"]:hover::before {
+  height: 6px;
+}
+
+/* played progress length - Chrome & safari*/
+input[type="range"]::before {
+  content: '';
+  height: 2px;
+  background: var(--color);
+  width: var(--range-progress);
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: height 0.2s;
+}
+
+/* slider thumb - chrome and safari */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--color);
+  height: 8px;
+  width: 8px;
+  transform: scale(1);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+/* hover thumb - chrome and safari */
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.4);
+}
+
+/* dragging thumb - chrome and safari */
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.8);
+}
+
+/* Input range - firefox */
+input[type="range"]::-moz-range-track {
+  appearance: none;
+  top: 0;
+  left: 2%;
+  background: transparent;
+  width: 96%;
+  height: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* played progress length - firefox */
+input[type="range"]::-moz-range-progress {
+  content: '';
+  height: 4px;
+  background: var(--color);
+  width: var(--range-progress);
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: height 0.2s;
+}
+
+input[type="range"]:hover::-moz-range-progress {
+  height: 6px;
+}
+
+/* slider thumb - firefox */
+input[type="range"]::-moz-range-thumb {
+  appearance: none;
+  background: var(--color);
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+/* dragging thumb - firefox */
+input[type="range"]:active::-moz-range-thumb {
+  transform: scale(1.8);
+}
+
+/* hover thumb - chrome and safari */
+input[type="range"]:hover::-moz-range-thumb {
+  transform: scale(1.4);
+}
