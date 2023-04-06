@@ -1,12 +1,15 @@
 import { useRef, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
-import actions from "../../redux/track/track-slice";
+import { getCurrentTrack, getIsPlaying, getIsAutoPlay, getFrom, getPosition } from "../../redux/track/selectors";
+import { getAlbumData, getSearchData } from "../../redux/data/selectors";
 import { ProgressBar } from "./progressbar/progressbar";
 import { PlayButtons } from "./play-buttons";
+import { UserButtons } from "./user-buttons";
 import { TrackInfo } from "./track-info";
+import { From } from "../../const";
+import actions from "../../redux/track/track-slice";
 
-const { changeIsPlaying } = actions;
+const { changeIsPlaying, changeCurrentTrack, changePosition } = actions;
 
 export const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -17,13 +20,56 @@ export const Player = (): JSX.Element => {
   
   const currentTrack = useAppSelector(getCurrentTrack);
   const isPlaying = useAppSelector(getIsPlaying);
+  const isAutoPlay = useAppSelector(getIsAutoPlay);
+  const from = useAppSelector(getFrom);
+  const position = useAppSelector(getPosition);
+  const searchData = useAppSelector(getSearchData);
+  const albumData = useAppSelector(getAlbumData);
 
   useEffect(() => {
     const audio = audioRef.current;
     const endedHandler = () => {
-      dispatch(changeIsPlaying(false));
+      if (isAutoPlay) {
+        if (from === From.Search) {
+
+          if (position === searchData.length) {
+            dispatch(changePosition(1));
+            dispatch(changeCurrentTrack(searchData[0]));
+          } else {
+            dispatch(changePosition(position + 1));
+            dispatch(changeCurrentTrack(searchData[position]));
+          };
+          
+        } else if (from === From.Album) {
+          
+          if (position === albumData?.tracks.length) {
+            dispatch(changePosition(0));
+            dispatch(changeCurrentTrack(albumData?.tracks[0]));
+          } else {
+            dispatch(changePosition(position + 1));
+            dispatch(changeCurrentTrack(albumData?.tracks[position]));
+          };
+          
+        };
+        dispatch(changeIsPlaying(true));
+      } else {
+        dispatch(changeIsPlaying(false));
+      };
     };
 
+    if (audio) {
+      audio.addEventListener('ended', endedHandler);
+    };
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener('ended', endedHandler);
+      };
+    };
+  }, [albumData?.tracks, dispatch, from, isAutoPlay, position, searchData]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
     if (audio) {
       if (isPlaying) {
         audio.play();
@@ -31,15 +77,8 @@ export const Player = (): JSX.Element => {
       } else {
         audio.pause();
       };
-      audio.addEventListener('ended', endedHandler);
     };
-
-    return () => {
-      if (audio) {
-        audio.removeEventListener('ended', endedHandler);
-      }
-    };
-  }, [dispatch, isPlaying]);
+  }, [isPlaying]);
 
   return (
     <div className={`
@@ -58,6 +97,7 @@ export const Player = (): JSX.Element => {
       />
       <PlayButtons />
       <TrackInfo />
+      <UserButtons />
       <ProgressBar audioRef={audioRef} />
     </div>
   );

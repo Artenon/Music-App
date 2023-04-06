@@ -7,11 +7,13 @@ const initialState: {
   isPlaying: boolean;
   from: From;
   position: number;
+  autoPlay: boolean;
 } = {
   currentTrack: null,
   isPlaying: false,
   from: From.None,
   position: 0,
+  autoPlay: false,
 };
 
 export const trackSlice = createSlice({
@@ -29,6 +31,9 @@ export const trackSlice = createSlice({
     },
     changePosition: (state, action) => {
       state.position = action.payload;
+    },
+    changeAutoPlay: (state, action) => {
+      state.autoPlay = action.payload;
     }
   },
 });

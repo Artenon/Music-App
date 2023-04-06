@@ -9,3 +9,5 @@ export const getIsPlaying = (state: RootState): boolean => state.TRACK.isPlaying
 export const getFrom = (state: RootState): From => state.TRACK.from;
 
 export const getPosition = (state: RootState): number => state.TRACK.position;
+
+export const getIsAutoPlay = (state: RootState): boolean => state.TRACK.autoPlay;
