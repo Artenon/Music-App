@@ -22,8 +22,8 @@ export const UserButtons = (): JSX.Element => {
       <div className="cursor-pointer" onClick={repeatHandler}>
         {
           isAutoPlay
-          ? <TbRepeat />
-          : <TbRepeatOff />
+          ? <TbRepeat title="Turn off Autoplay" />
+          : <TbRepeatOff title="Turn on Autoplay" />
         }
       </div>
       <div onClick={() => setIsLiked(!isLiked)} className="cursor-pointer">

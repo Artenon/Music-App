@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { BiCopyright } from "react-icons/bi";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getAlbumData, getIsLoading } from "../../redux/data/selectors";
 import { getAlbum } from "../../redux/data/api-actions";
@@ -23,7 +24,7 @@ export const AlbumPage = (): JSX.Element => {
     return <Spinner />;
   }
   
-  /* albumData.genres.data */
+  const genres = albumData.genres.data.map(genre => genre.name);
 
   const date = new Date(Date.parse(albumData.release_date)).toLocaleString("en-US", {
     year: 'numeric',
@@ -40,10 +41,16 @@ export const AlbumPage = (): JSX.Element => {
           <p className="text-6xl my-4">{albumData.title}</p>
           <div className="flex items-center">
             <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
-            <p className="ml-2">
+            <p className="ml-2 flex items-center">
               {albumData.artist.name}
               <span className="text-white mx-1">&#183;</span>
               {albumData.release_date.split('-')[0]}
+              <span className="text-white mx-1">&#183;</span>
+              <div className="flex gap-2">
+                {albumData.genres.data.map(genre => (
+                  <div className="bg-white rounded-lg text-black p-1">{genre.name}</div>
+                ))}
+              </div>
             </p>
           </div>
         </div>
@@ -57,7 +64,10 @@ export const AlbumPage = (): JSX.Element => {
         })
       }
 
-      <div className="pt-4 text-gray-200/60">{date}</div>
+      <div className="pt-4 text-gray-200/60 flex flex-col">
+        {date}
+        <div className="flex items-center"><BiCopyright className="mr-1" />{albumData.label}</div>
+      </div>
     </div>
   );
 };
