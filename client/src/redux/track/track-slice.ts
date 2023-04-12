@@ -17,7 +17,7 @@ const initialState: {
 };
 
 export const trackSlice = createSlice({
-  name: NameSpace.DATA,
+  name: NameSpace.TRACK,
   initialState,
   reducers: {
     changeCurrentTrack: (state, action) => {

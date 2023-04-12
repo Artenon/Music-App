@@ -6,10 +6,12 @@ import { saveUser, removeUser } from "../../service/user-storage";
 
 const initialState: {
   isLoading: boolean;
-  authStatus: AuthStatus
+  authStatus: AuthStatus;
+  username: string;
 } = {
   isLoading: false,
-  authStatus: AuthStatus.Unauthorized
+  authStatus: AuthStatus.Unauthorized,
+  username: ''
 };
 
 export const authSlice = createSlice({
@@ -45,6 +47,7 @@ export const authSlice = createSlice({
       })
       .addCase(getAuthStatus.fulfilled, (state, action) => {
         state.authStatus = action.payload.message;
+        state.username = action.payload.username;
       });
   }
 });

@@ -44,8 +44,9 @@ router.post(
 
 /* login */
 router.route('/api/auth/login')
-  .get(authMiddleware, (req, res) => {
-    res.status(200).json({ message: 'Authorized' });
+  .get(authMiddleware, async (req, res) => {
+    const user = await User.findById(req.user.userId);
+    res.status(200).json({ message: 'Authorized', username: user.username });
   })
   .post(
     [
@@ -88,7 +89,7 @@ router.route('/api/auth/login')
     }
   );
 
-router.delete('/api/auth/logout', authMiddleware, async (req, res) => {
+router.delete('/api/auth/logout', authMiddleware, (req, res) => {
   res.status(200).json({message: 'You have logged out'});
 });
 

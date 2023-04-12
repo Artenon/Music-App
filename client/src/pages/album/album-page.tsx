@@ -23,8 +23,6 @@ export const AlbumPage = (): JSX.Element => {
   if (isLoading || !albumData) {
     return <Spinner />;
   }
-  
-  const genres = albumData.genres.data.map(genre => genre.name);
 
   const date = new Date(Date.parse(albumData.release_date)).toLocaleString("en-US", {
     year: 'numeric',
