@@ -45,8 +45,12 @@ router.post(
 /* login */
 router.route('/api/auth/login')
   .get(authMiddleware, async (req, res) => {
-    const user = await User.findById(req.user.userId);
-    res.status(200).json({ message: 'Authorized', username: user.username });
+    try {
+      const user = await User.findById(req.user.userId);
+      res.status(200).json({ message: 'Authorized', username: user.username, favorites: user.favorites });
+    } catch (error) {
+      res.status(401).json({ message: 'Unauthorized' });
+    }
   })
   .post(
     [

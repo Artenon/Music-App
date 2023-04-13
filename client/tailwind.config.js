@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       boxShadow: {
         'inner': 'inset 0 0 60px rgb(0 0 0 / 1)',
-        'player': '0 0 20px rgb(0 0 0 / .4)'
+        'extra': '0 5px 20px rgb(0 0 0 / .4)'
       },
       dropShadow: {
         'heart': '0 0 7px #be185d'

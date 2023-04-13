@@ -33,7 +33,7 @@ export const AlbumPage = (): JSX.Element => {
   return (
     <div className="flex flex-col text-white p-8 pb-24">
       <div className="flex items-end mb-8">
-        <img src={albumData.cover_big} className="w-[400px] h-[400px] rounded-xl shadow-player" alt="cover" />
+        <img src={albumData.cover_big} className="w-[400px] h-[400px] rounded-xl shadow-extra" alt="cover" />
         <div className="flex flex-col text-xl font-bold ml-8">
           <p className="uppercase">{albumData.record_type}</p>
           <p className="text-6xl my-4">{albumData.title}</p>

@@ -12,11 +12,13 @@ export type LoginResponse = {
   token: string;
   userId: string;
   username: string;
+  favorites: number[];
 };
 
 export type AuthResponse = {
   message: AuthStatus;
   username: string;
+  favorites: number[];
 };
 
 export type SearchDataResponse = {

@@ -5,6 +5,7 @@ import path from "path";
 import authRoutes from "./routes/auth.routes.js";
 import searchRoutes from "./routes/search.routes.js";
 import albumRoutes from "./routes/album.routes.js";
+import favoritesRoutes from "./routes/favorites.route.js";
 
 const __dirname = path.resolve();
 const app = express();
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 app.use(searchRoutes);
 app.use(albumRoutes);
+app.use(favoritesRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'client', 'build')));

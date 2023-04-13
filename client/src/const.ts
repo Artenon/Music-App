@@ -12,18 +12,18 @@ export enum APIRoute {
   Logout = '/auth/logout',
   Search = '/search?q=',
   Album = '/album',
-}
+};
 
 export enum AppRoute {
   Main = '/',
   Login = '/login',
   Register = '/register',
   Album = '/album'
-}
+};
 
 export const toastifyOptions: ToastOptions = {
   theme: 'dark',
-  position: 'top-right',
+  position: 'bottom-right',
   autoClose: 2500,
   toastId: 1,
 };

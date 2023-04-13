@@ -85,7 +85,7 @@ export const Player = (): JSX.Element => {
       audio-player transition-all duration-300
       fixed z-10
       h-20 left-1/2 -translate-x-1/2 bg-black/20
-      backdrop-blur-xl text-white shadow-player rounded-xl
+      backdrop-blur-xl text-white shadow-extra rounded-xl
       flex items-center px-4
       ${isShowing ? "bottom-4" : "-bottom-24 invisible"}`}
     >

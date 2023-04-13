@@ -14,10 +14,9 @@ export default async (req, res, next) => {
 
     const decoded = jwt.verify(token, config.get('secretKey'));
     req.user = decoded;
-    /* const user = await User.findById(req.user.userId); */
     next();
 
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 }

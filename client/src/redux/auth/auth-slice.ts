@@ -8,10 +8,12 @@ const initialState: {
   isLoading: boolean;
   authStatus: AuthStatus;
   username: string;
+  favorites: number[];
 } = {
   isLoading: false,
   authStatus: AuthStatus.Unauthorized,
-  username: ''
+  username: '',
+  favorites: [],
 };
 
 export const authSlice = createSlice({
@@ -33,6 +35,8 @@ export const authSlice = createSlice({
       .addCase(loginAction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.authStatus = AuthStatus.Authorized;
+        state.username = action.payload.username;
+        state.favorites = action.payload.favorites;
         toast.success(action.payload.message, toastifyOptions);
         Reflect.deleteProperty(action.payload, 'message');
         saveUser(action.payload);
@@ -48,6 +52,7 @@ export const authSlice = createSlice({
       .addCase(getAuthStatus.fulfilled, (state, action) => {
         state.authStatus = action.payload.message;
         state.username = action.payload.username;
+        state.favorites = action.payload.favorites;
       });
   }
 });
