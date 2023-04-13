@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from "ax
 import { toast } from 'react-toastify';
 import { DefaultResponse } from "../types/server.types";
 import { toastifyOptions } from "../const";
-import { getUser } from "../service/user-storage";
+import { getToken } from "../service/user-storage";
 
 const BASE_URL = '/api';
 
@@ -13,10 +13,10 @@ export const createAPI = (): AxiosInstance => {
   });
 
   api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    const userData = getUser();
+    const token = getToken();
     
-    if (userData && config.headers) {
-      config.headers['Authorization'] = `Bearer ${userData.token}`;
+    if (token && config.headers) {
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     
     return config;

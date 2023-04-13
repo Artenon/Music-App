@@ -1,7 +1,8 @@
 import { AxiosInstance } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../types/store.types";
-import { DefaultResponse, LoginResponse, AuthResponse } from "../../types/server.types";
+import { DefaultResponse, LoginResponse, AuthResponse, FavoriteResponse } from "../../types/server.types";
+import { SearchData } from "../../types/search-data.types";
 import { User } from "../../types/auth.types";
 import { NameSpace, APIRoute } from "../../const";
 
@@ -53,6 +54,32 @@ export const getAuthStatus = createAsyncThunk<AuthResponse, undefined, {
   `${NameSpace.AUTH}/getAuthStatus`,
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<AuthResponse>(APIRoute.Login);
+    return data;
+  }
+);
+
+export const addFavorite = createAsyncThunk<FavoriteResponse, SearchData, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}
+>(
+  `${NameSpace.AUTH}/addFavorite`,
+  async (favorite, {dispatch, extra: api}) => {
+    const {data} = await api.post<FavoriteResponse>(APIRoute.Favorites, {favorite});
+    return data;
+  }
+);
+
+export const removeFavorite = createAsyncThunk<FavoriteResponse, SearchData, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}
+>(
+  `${NameSpace.AUTH}/removeFavorite`,
+  async (favorite, {dispatch, extra: api}) => {
+    const {data} = await api.post<FavoriteResponse>(`${APIRoute.Favorites}${APIRoute.Remove}`, {favorite})
     return data;
   }
 );

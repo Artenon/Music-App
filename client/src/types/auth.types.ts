@@ -2,9 +2,5 @@ export type User = {
   email: string,
   password: string,
   username?: string,
+  favorites?: number[],
 };
-
-export type UserStorage = {
-  token: string,
-  userId: string,
-}

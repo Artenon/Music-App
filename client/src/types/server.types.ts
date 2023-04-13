@@ -12,13 +12,13 @@ export type LoginResponse = {
   token: string;
   userId: string;
   username: string;
-  favorites: number[];
+  favorites: SearchData[];
 };
 
 export type AuthResponse = {
   message: AuthStatus;
   username: string;
-  favorites: number[];
+  favorites: SearchData[];
 };
 
 export type SearchDataResponse = {
@@ -27,4 +27,9 @@ export type SearchDataResponse = {
 
 export type AlbumDataResponse = {
   data: AlbumData;
-}
+};
+
+export type FavoriteResponse = {
+  message: string;
+  favorites: SearchData[];
+};

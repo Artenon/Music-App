@@ -12,6 +12,8 @@ export enum APIRoute {
   Logout = '/auth/logout',
   Search = '/search?q=',
   Album = '/album',
+  Favorites = '/favorites',
+  Remove = '/remove',
 };
 
 export enum AppRoute {

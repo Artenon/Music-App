@@ -39,17 +39,17 @@ export const AlbumPage = (): JSX.Element => {
           <p className="text-6xl my-4">{albumData.title}</p>
           <div className="flex items-center">
             <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
-            <p className="ml-2 flex items-center">
+            <div className="ml-2 flex items-center">
               {albumData.artist.name}
               <span className="text-white mx-1">&#183;</span>
               {albumData.release_date.split('-')[0]}
               <span className="text-white mx-1">&#183;</span>
               <div className="flex gap-2">
                 {albumData.genres.data.map(genre => (
-                  <div className="bg-white rounded-lg text-black p-1">{genre.name}</div>
+                  <div key={genre.id} className="bg-white rounded-lg text-black p-1">{genre.name}</div>
                 ))}
               </div>
-            </p>
+            </div>
           </div>
         </div>
       </div>
