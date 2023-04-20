@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CgMenuGridO } from "react-icons/cg";
+import { RxCross2 } from "react-icons/rx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket, faRightFromBracket, faUser, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
@@ -26,9 +27,9 @@ const Logout = ({userName}: {userName: string}): JSX.Element => {
 
   return (
     <div className="p-2" onClick={logoutHandler}>
-        <div className="flex items-center gap-2"><FontAwesomeIcon icon={faUser} /> {userName}</div>
-        <div className="flex items-center gap-2"><FontAwesomeIcon icon={faHeart} className="text-rose-600" /> My Favorites</div>
-        <button className="flex items-center gap-2"><FontAwesomeIcon icon={faRightFromBracket} /> Logout</button>
+      <div className="flex items-center gap-2"><FontAwesomeIcon icon={faUser} /> {userName}</div>
+      <div className="flex items-center gap-2"><FontAwesomeIcon icon={faHeart} className="text-rose-600" /> My Favorites</div>
+      <button className="flex items-center gap-2"><FontAwesomeIcon icon={faRightFromBracket} /> Logout</button>
     </div>
   );
 };
@@ -50,28 +51,35 @@ export const Account = (): JSX.Element => {
   return (
     <div className="fixed top-4 right-6 z-10">
       <div 
-        className="
+        className={`
           cursor-pointer text-4xl
           text-white rounded-full p-1 transition-all
-          hover:text-gray-800 hover:bg-white"
+          hover:text-gray-800 hover:bg-white
+          ${isOpen && "text-gray-800 bg-white"}`}
         onClick={openHandler}
       >
-        <CgMenuGridO />
+        {
+          isOpen
+          ? <RxCross2 className="animate-floatIn text-gray-800 opacity-100 scale-100" />
+          : <CgMenuGridO className="animate-floatIn opacity-100 scale-100" />
+        }
       </div>
-      {
-        isOpen &&
-        <div className="
-          absolute right-10 flex flex-col gap-1
-          text-white text-lg rounded-lg font-bold whitespace-nowrap
-          backdrop-blur-xl shadow-extra"
-        >
-          {
-            authStatus === AuthStatus.Unauthorized
-            ? <Login />
-            : <Logout userName={userName} />
-          }
-        </div>
-      }
+      <div className={`
+        absolute flex flex-col gap-1
+        text-white text-lg rounded-lg font-bold whitespace-nowrap
+        backdrop-blur-xl shadow-extra
+        transition-all
+        ${isOpen
+          ? "scale-100 opacity-100 right-10 top-10"
+          : "scale-50 opacity-0 right-0 top-4"}
+        `}
+      >
+        {
+          authStatus === AuthStatus.Unauthorized
+          ? <Login />
+          : <Logout userName={userName} />
+        }
+      </div>
     </div> 
   );
 };

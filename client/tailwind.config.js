@@ -18,7 +18,8 @@ module.exports = {
       animation: {
         spinner: 'animateSpinner 0.2s linear',
         heartIn: 'animateHeartIn 0.2s ease-out',
-        heartOut: 'animateHeartOut 0.2s ease-in-out'
+        heartOut: 'animateHeartOut 0.2s ease-in-out',
+        floatIn: 'floatIn 0.15s ease-in-out'
       },
       keyframes: {
         animateSpinner: {
@@ -35,6 +36,10 @@ module.exports = {
           '25%': { transform: 'translateX(-10%)' },
           '75%': { transform:  'translateX(10%)' },
           '100%': { transform:  'translateX(0))' }
+        },
+        floatIn: {
+          '0%': { transform: 'scale(0)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' }
         }
       }
     },
