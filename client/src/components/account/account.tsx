@@ -26,10 +26,27 @@ const Logout = ({userName}: {userName: string}): JSX.Element => {
   };
 
   return (
-    <div className="p-2" onClick={logoutHandler}>
-      <div className="flex items-center gap-2"><FontAwesomeIcon icon={faUser} /> {userName}</div>
-      <div className="flex items-center gap-2"><FontAwesomeIcon icon={faHeart} className="text-rose-600" /> My Favorites</div>
-      <button className="flex items-center gap-2"><FontAwesomeIcon icon={faRightFromBracket} /> Logout</button>
+    <div className="p-2">
+      <div className="
+        flex items-center gap-2 p-1 rounded-lg transition-all
+        hover:bg-white hover:text-gray-700
+      ">
+        <FontAwesomeIcon icon={faUser} />{userName}
+      </div>
+      <div className="
+        flex items-center gap-2 p-1 rounded-lg transition-all
+        hover:bg-white hover:text-gray-700
+      ">
+        <FontAwesomeIcon icon={faHeart} className="text-rose-600" />My Favorites
+      </div>
+      <div
+        className="
+          flex items-center gap-2 p-1 rounded-lg transition-all cursor-pointer
+          hover:bg-white hover:text-gray-700"
+        onClick={logoutHandler}
+      >
+        <FontAwesomeIcon icon={faRightFromBracket} />Logout
+      </div>
     </div>
   );
 };
@@ -55,7 +72,8 @@ export const Account = (): JSX.Element => {
           cursor-pointer text-4xl
           text-white rounded-full p-1 transition-all
           hover:text-gray-800 hover:bg-white
-          ${isOpen && "text-gray-800 bg-white"}`}
+          ${isOpen && "text-gray-800 bg-white"}
+        `}
         onClick={openHandler}
       >
         {
@@ -71,7 +89,7 @@ export const Account = (): JSX.Element => {
         transition-all
         ${isOpen
           ? "scale-100 opacity-100 right-10 top-10"
-          : "scale-50 opacity-0 right-0 top-4"}
+          : "scale-50 opacity-0 right-0 top-4 invisible"}
         `}
       >
         {

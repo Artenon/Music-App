@@ -49,6 +49,7 @@ export const authSlice = createSlice({
         state.authStatus = AuthStatus.Unauthorized;
         state.username = '';
         state.favorites = [];
+        state.isLoading = false;
         toast.warn(action.payload.message, toastifyOptions);
         removeToken();
       })
