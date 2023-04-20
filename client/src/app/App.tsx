@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AppRoute } from "../const";
 import { Main } from "../pages/main/main-page";
-import LoginPage from "../pages/login/login-page";
+import { LoginPage } from "../pages/login/login-page";
 import { useAppDispatch } from "../hooks/hooks";
 import { getAuthStatus } from "../redux/auth/api-actions";
 import { AlbumPage } from "../pages/album/album-page";

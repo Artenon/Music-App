@@ -11,7 +11,7 @@ import { AppRoute } from "../../const";
 
 const validEmailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-const Register = (): JSX.Element => {
+export const Register = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const confirmRef = useRef<HTMLInputElement | null>(null);
@@ -159,5 +159,3 @@ const Register = (): JSX.Element => {
     </div>
   );
 }
-
-export default Register;

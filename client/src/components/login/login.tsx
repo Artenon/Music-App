@@ -9,7 +9,7 @@ import { getIsLoading } from "../../redux/auth/selectors";
 import { User } from '../../types/auth.types';
 import { AppRoute } from "../../const";
 
-const Login = (): JSX.Element => {
+export const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState<User>({ email: '', password: '' });
@@ -78,5 +78,3 @@ const Login = (): JSX.Element => {
     </div>
   );
 }
-
-export default Login;
