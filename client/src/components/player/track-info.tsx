@@ -15,7 +15,7 @@ export const TrackInfo = (): JSX.Element => {
       <div className="flex flex-col mx-1 max-w-[432px]">
         <div className="flex items-center">
           {currentTrack?.explicit_lyrics && <BsFillExplicitFill className="mr-1 text-sm" />}
-          <div className="track truncate hover:underline">
+          <div className="track truncate hover:underline text-lg">
             <Link to={`${AppRoute.Album}/${currentTrack?.album.id}`}>{currentTrack?.title_short}</Link>
           </div>
         </div>

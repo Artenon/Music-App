@@ -66,9 +66,9 @@ export const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => 
           </div>
         </div>
         <div className="flex ml-4 items-center">
-          <img className="w-[56px] h-[56px] mr-2 rounded-md" src={track.album.cover_small} alt="cover" />
+          <img className={`w-[56px] h-[56px] mr-2 rounded-md transition-all group-hover/song:shadow-cover ${isActive && "shadow-cover"}`} src={track.album.cover_small} alt="cover" />
           <div>
-            <p>{track.title}</p>
+            <p className="text-lg">{track.title}</p>
             <p className={`${isActive ? "text-black/60" : "text-gray-300/60"} group-hover/song:text-black/60`}>
               {track.artist.name}
             </p>

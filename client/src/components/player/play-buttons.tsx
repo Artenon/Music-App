@@ -7,7 +7,7 @@ import { getSearchData, getAlbumData } from "../../redux/data/selectors";
 import actions from "../../redux/track/track-slice";
 import { From } from "../../const";
 
-const { changeIsPlaying, changeCurrentTrack, changePosition } = actions;
+const { changeIsPlaying, changeCurrentTrack, changePosition, changeAutoPlay } = actions;
 
 export const PlayButtons = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -46,7 +46,9 @@ export const PlayButtons = (): JSX.Element => {
       
     } else if (from === From.Favorites) {
 
-      if (position === 1) {
+      if (favorites.length === 0) {
+        dispatch(changeAutoPlay(false));
+      } else if (position === 1) {
         dispatch(changePosition(favorites.length));
         dispatch(changeCurrentTrack(favorites[favorites.length - 1]));
       } else {
@@ -81,7 +83,9 @@ export const PlayButtons = (): JSX.Element => {
       
     } else if (from === From.Favorites) {
 
-      if (position === favorites.length) {
+      if (favorites.length === 0) {
+        dispatch(changeAutoPlay(false));
+      } else if (position === favorites.length) {
         dispatch(changePosition(1));
         dispatch(changeCurrentTrack(favorites[0]));
       } else {

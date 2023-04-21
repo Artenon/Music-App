@@ -42,6 +42,9 @@ export const authSlice = createSlice({
         Reflect.deleteProperty(action.payload, 'message');
         saveToken(action.payload.token);
       })
+      .addCase(loginAction.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(logoutAction.pending, (state) => {
         state.isLoading = true;
       })
@@ -52,6 +55,9 @@ export const authSlice = createSlice({
         state.isLoading = false;
         toast.warn(action.payload.message, toastifyOptions);
         removeToken();
+      })
+      .addCase(registerAction.rejected, (state) => {
+        state.isLoading = false;
       })
       .addCase(getAuthStatus.fulfilled, (state, action) => {
         state.authStatus = action.payload.message;

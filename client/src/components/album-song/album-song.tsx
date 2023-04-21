@@ -76,7 +76,7 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
           </div>
         </div>
         <div className="ml-4">
-          <p>{track.title}</p>
+          <p className="text-lg">{track.title}</p>
           <p className={`${isActive ? "text-black/60" : "text-gray-300/60"} group-hover/song:text-black/60`}>{album.artist.name}</p>
         </div>
       </div>

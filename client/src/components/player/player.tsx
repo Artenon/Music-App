@@ -10,7 +10,7 @@ import { TrackInfo } from "./track-info";
 import { From } from "../../const";
 import actions from "../../redux/track/track-slice";
 
-const { changeIsPlaying, changeCurrentTrack, changePosition } = actions;
+const { changeIsPlaying, changeCurrentTrack, changePosition, changeAutoPlay } = actions;
 
 export const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -54,7 +54,9 @@ export const Player = (): JSX.Element => {
           
         } else if (from === From.Favorites) {
 
-          if (position === favorites.length) {
+          if (favorites.length === 0) {
+            dispatch(changeAutoPlay(false));
+          } else if (position === favorites.length) {
             dispatch(changePosition(1));
             dispatch(changeCurrentTrack(favorites[0]));
           } else {
