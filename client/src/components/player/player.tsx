@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying, getIsAutoPlay, getFrom, getPosition } from "../../redux/track/selectors";
 import { getAlbumData, getSearchData } from "../../redux/data/selectors";
+import { getFavorites } from "../../redux/auth/selectors";
 import { ProgressBar } from "./progressbar/progressbar";
 import { PlayButtons } from "./play-buttons";
 import { UserButtons } from "./user-buttons";
@@ -25,6 +26,7 @@ export const Player = (): JSX.Element => {
   const position = useAppSelector(getPosition);
   const searchData = useAppSelector(getSearchData);
   const albumData = useAppSelector(getAlbumData);
+  const favorites = useAppSelector(getFavorites);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -43,13 +45,23 @@ export const Player = (): JSX.Element => {
         } else if (from === From.Album) {
           
           if (position === albumData?.tracks.length) {
-            dispatch(changePosition(0));
+            dispatch(changePosition(1));
             dispatch(changeCurrentTrack(albumData?.tracks[0]));
           } else {
             dispatch(changePosition(position + 1));
             dispatch(changeCurrentTrack(albumData?.tracks[position]));
           };
           
+        } else if (from === From.Favorites) {
+
+          if (position === favorites.length) {
+            dispatch(changePosition(1));
+            dispatch(changeCurrentTrack(favorites[0]));
+          } else {
+            dispatch(changePosition(position + 1));
+            dispatch(changeCurrentTrack(favorites[position]));
+          };
+
         };
         dispatch(changeIsPlaying(true));
       } else {
@@ -66,7 +78,7 @@ export const Player = (): JSX.Element => {
         audio.removeEventListener('ended', endedHandler);
       };
     };
-  }, [albumData?.tracks, dispatch, from, isAutoPlay, position, searchData]);
+  }, [albumData?.tracks, dispatch, favorites, from, isAutoPlay, position, searchData]);
 
   useEffect(() => {
     const audio = audioRef.current;

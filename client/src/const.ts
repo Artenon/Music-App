@@ -39,5 +39,6 @@ export enum AuthStatus {
 export enum From {
   Search = 'Search',
   Album = 'Album',
+  Favorites = 'Favorites',
   None = 'None'
 };

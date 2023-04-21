@@ -54,7 +54,7 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
     } else if (isCurrentTrack && isPlaying) {
       setIsActive(true);
     };
-  }, [isCurrentTrack, isPlaying, dispatch]);
+  }, [isCurrentTrack, isPlaying]);
 
   return (
     <div className="flex py-1">

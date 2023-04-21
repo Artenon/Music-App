@@ -35,9 +35,9 @@ const Logout = ({userName}: {userName: string}): JSX.Element => {
       </div>
       <div className="
         p-1 rounded-lg transition-all cursor-pointer
-        hover:bg-white
+        hover:bg-white group/favorites
       ">
-        <Link className="flex items-center gap-2 hover:text-gray-700 transition-all" to={AppRoute.Favorites}>
+        <Link className="flex items-center gap-2 transition-all group-hover/favorites:text-gray-700" to={AppRoute.Favorites}>
           <FontAwesomeIcon icon={faHeart} className="text-rose-600" />My Favorites
         </Link>
       </div>

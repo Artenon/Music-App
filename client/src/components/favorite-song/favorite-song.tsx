@@ -1,20 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiPause, HiPlay } from "react-icons/hi";
 import { SongData } from "../../types/song.types";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
+import actions from "../../redux/track/track-slice";
+import { From } from "../../const";
 
 type FavoriteSongProps = {
   track: SongData;
   index: number;
 };
 
+const { changeIsPlaying, changeCurrentTrack, changeFrom, changePosition } = actions;
+
 export const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const currentTrack = useAppSelector(getCurrentTrack);
   const isPlaying = useAppSelector(getIsPlaying);
   const isCurrentTrack = currentTrack?.id === track.id;
+
+  const handleClick = () => {
+    if (isCurrentTrack && !isPlaying) {
+      dispatch(changeIsPlaying(true));
+      setIsActive(true);  
+    } else if (isCurrentTrack) {
+      dispatch(changeIsPlaying(false));
+      setIsActive(false);
+    } else {
+      dispatch(changeCurrentTrack({ ...track }));
+      dispatch(changeIsPlaying(true));
+      dispatch(changeFrom(From.Favorites));
+      dispatch(changePosition(index));
+      setIsActive(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!isCurrentTrack) {
+      setIsActive(false);
+    } else if (isCurrentTrack && isPlaying) {
+      setIsActive(true);
+    };
+  }, [isCurrentTrack, isPlaying]);
 
   return (
     <div className="flex py-1 text-white">
@@ -23,7 +53,7 @@ export const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => 
         hover:bg-white hover:text-black hover:font-bold hover:shadow-lg hover:pl-2
         transition-all cursor-pointer pr-2 p-1 rounded-lg
         ${isActive && "bg-white text-black font-bold shadow-lg pl-2"}`}
-        /* onClick={handleClick} */
+        onClick={handleClick}
       >
         <div className={`group-hover/song:scale-150 w-[20px] flex justify-end items-center ${isActive && "scale-150"}`}>
           <div className={`group-hover/song:hidden ${isActive && "hidden"}`}>{index}</div>

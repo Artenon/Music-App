@@ -46,7 +46,7 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
     } else if (isCurrentTrack && isPlaying) {
       setIsActive(true);
     };
-  }, [isCurrentTrack, isPlaying, dispatch]);
+  }, [isCurrentTrack, isPlaying]);
 
   return (
     <div

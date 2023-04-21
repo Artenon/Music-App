@@ -2,6 +2,7 @@ import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getIsPlaying, getFrom, getPosition } from "../../redux/track/selectors";
+import { getFavorites } from "../../redux/auth/selectors";
 import { getSearchData, getAlbumData } from "../../redux/data/selectors";
 import actions from "../../redux/track/track-slice";
 import { From } from "../../const";
@@ -16,6 +17,7 @@ export const PlayButtons = (): JSX.Element => {
   const position = useAppSelector(getPosition);
   const searchData = useAppSelector(getSearchData);
   const albumData = useAppSelector(getAlbumData);
+  const favorites = useAppSelector(getFavorites);
   
   const playHandler = () => {
     dispatch(changeIsPlaying(!isPlaying));
@@ -42,6 +44,16 @@ export const PlayButtons = (): JSX.Element => {
         dispatch(changeCurrentTrack(albumData?.tracks[position - 2]));
       };
       
+    } else if (from === From.Favorites) {
+
+      if (position === 1) {
+        dispatch(changePosition(favorites.length));
+        dispatch(changeCurrentTrack(favorites[favorites.length - 1]));
+      } else {
+        dispatch(changePosition(position - 1));
+        dispatch(changeCurrentTrack(favorites[position - 2]));
+      };
+
     };
     dispatch(changeIsPlaying(true));
   };
@@ -60,13 +72,23 @@ export const PlayButtons = (): JSX.Element => {
     } else if (from === From.Album) {
       
       if (position === albumData?.tracks.length) {
-        dispatch(changePosition(0));
+        dispatch(changePosition(1));
         dispatch(changeCurrentTrack(albumData?.tracks[0]));
       } else {
         dispatch(changePosition(position + 1));
         dispatch(changeCurrentTrack(albumData?.tracks[position]));
       };
       
+    } else if (from === From.Favorites) {
+
+      if (position === favorites.length) {
+        dispatch(changePosition(1));
+        dispatch(changeCurrentTrack(favorites[0]));
+      } else {
+        dispatch(changePosition(position + 1));
+        dispatch(changeCurrentTrack(favorites[position]));
+      };
+
     };
     dispatch(changeIsPlaying(true));
   };
