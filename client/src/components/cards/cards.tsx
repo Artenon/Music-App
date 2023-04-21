@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
-import { SearchData } from "../../types/search-data.types";
+import { SongData } from "../../types/song.types";
 import actions from "../../redux/track/track-slice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
 import { AppRoute, From } from "../../const";
 
 type CardProps = {
-  item: SearchData;
+  item: SongData;
   index: number;
 };
 
@@ -95,7 +95,7 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
 };
 
 type CardsProps = {
-  data: SearchData[];
+  data: SongData[];
 };
 
 export const Cards = ({data}: CardsProps): JSX.Element => (

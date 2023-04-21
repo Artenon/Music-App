@@ -2,7 +2,7 @@ import { AxiosInstance } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../types/store.types";
 import { DefaultResponse, LoginResponse, AuthResponse, FavoriteResponse } from "../../types/server.types";
-import { SearchData } from "../../types/search-data.types";
+import { SongData } from "../../types/song.types";
 import { User } from "../../types/auth.types";
 import { NameSpace, APIRoute } from "../../const";
 
@@ -58,7 +58,7 @@ export const getAuthStatus = createAsyncThunk<AuthResponse, undefined, {
   }
 );
 
-export const addFavorite = createAsyncThunk<FavoriteResponse, SearchData, {
+export const addFavorite = createAsyncThunk<FavoriteResponse, SongData, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance
@@ -71,7 +71,7 @@ export const addFavorite = createAsyncThunk<FavoriteResponse, SearchData, {
   }
 );
 
-export const removeFavorite = createAsyncThunk<FavoriteResponse, SearchData, {
+export const removeFavorite = createAsyncThunk<FavoriteResponse, SongData, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance

@@ -20,7 +20,8 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Register = '/register',
-  Album = '/album'
+  Album = '/album',
+  Favorites = '/favorites',
 };
 
 export const toastifyOptions: ToastOptions = {

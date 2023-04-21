@@ -3,13 +3,13 @@ import { toast } from "react-toastify";
 import { NameSpace, toastifyOptions, AuthStatus } from "../../const";
 import { registerAction, loginAction, logoutAction, getAuthStatus, addFavorite, removeFavorite } from "./api-actions";
 import { saveToken, removeToken } from "../../service/user-storage";
-import { SearchData } from "../../types/search-data.types";
+import { SongData } from "../../types/song.types";
 
 const initialState: {
   isLoading: boolean;
   authStatus: AuthStatus;
   username: string;
-  favorites: SearchData[];
+  favorites: SongData[];
 } = {
   isLoading: false,
   authStatus: AuthStatus.Unauthorized,

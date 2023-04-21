@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { HiPlay, HiPause } from "react-icons/hi";
-import { Track, AlbumData } from "../../types/search-album.types";
+import { Track, AlbumData } from "../../types/album.types";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import actions from "../../redux/track/track-slice";
@@ -75,7 +75,7 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
             }
           </div>
         </div>
-        <div className="flex-col ml-4">
+        <div className="ml-4">
           <p>{track.title}</p>
           <p className={`${isActive ? "text-black/60" : "text-gray-300/60"} group-hover/song:text-black/60`}>{album.artist.name}</p>
         </div>

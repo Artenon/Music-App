@@ -34,10 +34,12 @@ const Logout = ({userName}: {userName: string}): JSX.Element => {
         <FontAwesomeIcon icon={faUser} />{userName}
       </div>
       <div className="
-        flex items-center gap-2 p-1 rounded-lg transition-all
-        hover:bg-white hover:text-gray-700
+        p-1 rounded-lg transition-all cursor-pointer
+        hover:bg-white
       ">
-        <FontAwesomeIcon icon={faHeart} className="text-rose-600" />My Favorites
+        <Link className="flex items-center gap-2 hover:text-gray-700 transition-all" to={AppRoute.Favorites}>
+          <FontAwesomeIcon icon={faHeart} className="text-rose-600" />My Favorites
+        </Link>
       </div>
       <div
         className="

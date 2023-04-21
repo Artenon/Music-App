@@ -1,11 +1,11 @@
-type Artist = {
+export type Artist = {
   id: number;
   name: string;
   picture_small: string;
   type: string;
 };
 
-type Album = {
+export type Album = {
   id: number;
   title: string;
   cover_small: string;
@@ -13,7 +13,7 @@ type Album = {
   type: string;
 };
 
-export type SearchData = {
+export type SongData = {
   id: number;
   title: string;
   title_short: string;

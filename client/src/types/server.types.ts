@@ -1,6 +1,6 @@
 import { AuthStatus } from "../const";
-import { AlbumData } from "./search-album.types";
-import { SearchData } from "./search-data.types";
+import { AlbumData } from "./album.types";
+import { SongData } from "./song.types";
 
 export type DefaultResponse = {
   message: string;
@@ -12,17 +12,17 @@ export type LoginResponse = {
   token: string;
   userId: string;
   username: string;
-  favorites: SearchData[];
+  favorites: SongData[];
 };
 
 export type AuthResponse = {
   message: AuthStatus;
   username: string;
-  favorites: SearchData[];
+  favorites: SongData[];
 };
 
 export type SearchDataResponse = {
-  data: SearchData[];
+  data: SongData[];
 };
 
 export type AlbumDataResponse = {
@@ -31,5 +31,5 @@ export type AlbumDataResponse = {
 
 export type FavoriteResponse = {
   message: string;
-  favorites: SearchData[];
+  favorites: SongData[];
 };

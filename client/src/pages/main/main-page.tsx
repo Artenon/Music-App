@@ -5,7 +5,7 @@ import { Cards } from "../../components/cards/cards";
 import { Spinner } from "../../components/spinner/spinner";
 import { Account } from "../../components/account/account";
 
-export const Main = (): JSX.Element => {
+export const MainPage = (): JSX.Element => {
   const searchData = useAppSelector(getSearchData);
   const isLoading = useAppSelector(getIsLoading);
 

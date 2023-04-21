@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NameSpace, From } from "../../const";
-import { SearchData } from "../../types/search-data.types";
+import { SongData } from "../../types/song.types";
 
 const initialState: {
-  currentTrack: SearchData | null;
+  currentTrack: SongData | null;
   isPlaying: boolean;
   from: From;
   position: number;

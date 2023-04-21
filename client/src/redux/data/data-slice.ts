@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { searchAction, getAlbum } from "./api-actions";
 import { NameSpace, toastifyOptions } from "../../const";
-import { SearchData } from "../../types/search-data.types";
-import { AlbumData } from "../../types/search-album.types";
+import { SongData } from "../../types/song.types";
+import { AlbumData } from "../../types/album.types";
 
 const initialState: {
   isLoading: boolean;
-  searchData: SearchData[];
+  searchData: SongData[];
   albumData: AlbumData | null;
 } = {
   isLoading: false,

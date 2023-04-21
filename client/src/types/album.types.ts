@@ -1,3 +1,5 @@
+import { Artist } from "./song.types";
+
 type Genres = {
   data: [
     {
@@ -6,13 +8,6 @@ type Genres = {
       picture: string;
     }
   ]
-};
-
-type Artist = {
-  id: number;
-  name: string;
-  picture_small: string;
-  type: string;
 };
 
 export type Track = {
