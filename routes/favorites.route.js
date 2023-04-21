@@ -9,7 +9,7 @@ router.post('/api/favorites', authMiddleware, async (req, res) => {
   try {
     const favorite = req.body.favorite;
     const user = await User.findById(req.user.userId);
-    user.favorites.push(favorite);
+    user.favorites = [favorite].concat(user.favorites);
     await user.save();
 
     res.status(200).json({ message: 'OK', favorites: user.favorites });
