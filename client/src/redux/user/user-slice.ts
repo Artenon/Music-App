@@ -30,6 +30,9 @@ export const userSlice = createSlice({
         state.isLoading = false;
         toast.success(action.payload.message, toastifyOptions);
       })
+      .addCase(registerAction.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(loginAction.pending, (state) => {
         state.isLoading = true;
       })
@@ -56,18 +59,23 @@ export const userSlice = createSlice({
         toast.warn(action.payload.message, toastifyOptions);
         removeToken();
       })
-      .addCase(registerAction.rejected, (state) => {
-        state.isLoading = false;
-      })
       .addCase(getAuthStatus.fulfilled, (state, action) => {
         state.authStatus = action.payload.message;
         state.username = action.payload.username;
         state.favorites = action.payload.favorites;
       })
+      .addCase(addFavorite.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(addFavorite.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.favorites = action.payload.favorites;
       })
+      .addCase(removeFavorite.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(removeFavorite.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.favorites = action.payload.favorites;
       });
   }

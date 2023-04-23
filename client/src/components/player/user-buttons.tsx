@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { TbRepeatOff, TbRepeat } from "react-icons/tb";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { ColorRing } from "react-loader-spinner";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getIsAutoPlay, getCurrentTrack } from "../../redux/track/selectors";
-import { getFavorites, getAuthStatus } from "../../redux/user/selectors";
+import { getFavorites, getAuthStatus, getIsLoading } from "../../redux/user/selectors";
 import actions from "../../redux/track/track-slice";
 import { addFavorite, removeFavorite } from "../../redux/user/api-actions";
 import { AuthStatus } from "../../const";
@@ -19,6 +20,7 @@ export const UserButtons = (): JSX.Element => {
   const currentTrack = useAppSelector(getCurrentTrack);
   const favorites = useAppSelector(getFavorites);
   const authStatus = useAppSelector(getAuthStatus);
+  const isLoading = useAppSelector(getIsLoading);
 
   const repeatHandler = () => {
     dispatch(changeAutoPlay(!isAutoPlay));
@@ -59,9 +61,17 @@ export const UserButtons = (): JSX.Element => {
         {
           authStatus === AuthStatus.Authorized
           ?
-            isLiked
-            ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
-            : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
+            isLoading
+            ?
+              <ColorRing
+                visible={true}
+                height="30"
+                width="30"
+                colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
+              />
+            : isLiked
+              ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
+              : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
           : null
         }
       </div>
