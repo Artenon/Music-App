@@ -1,6 +1,6 @@
 import { AiFillHeart } from "react-icons/ai";
 import { useAppSelector } from "../../hooks/hooks";
-import { getFavorites, getUsername } from "../../redux/auth/selectors";
+import { getFavorites, getUsername } from "../../redux/user/selectors";
 import { FavoriteSong } from "../../components/favorite-song/favorite-song";
 
 export const FavoritesPage = (): JSX.Element => {
@@ -19,9 +19,11 @@ export const FavoritesPage = (): JSX.Element => {
             By {username}
             <span className="text-white mx-1">&#183;</span>
             {
-              favorites.length > 1
-              ? `${favorites.length} songs`
-              : "1 song"
+              favorites.length === 0
+              ? "Nothing"
+              : favorites.length === 1
+                ? "1 song"
+                : `${favorites.length} songs`
             }
           </p>
         </div>

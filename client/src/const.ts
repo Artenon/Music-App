@@ -1,7 +1,7 @@
 import { ToastOptions } from 'react-toastify';
 
 export enum NameSpace {
-  AUTH = 'AUTH',
+  USER = 'USER',
   DATA = 'DATA',
   TRACK = 'TRACK',
 }

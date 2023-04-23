@@ -5,8 +5,8 @@ import { RxCross2 } from "react-icons/rx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket, faRightFromBracket, faUser, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { getAuthStatus, getUsername } from "../../redux/auth/selectors";
-import { logoutAction } from "../../redux/auth/api-actions";
+import { getAuthStatus, getUsername } from "../../redux/user/selectors";
+import { logoutAction } from "../../redux/user/api-actions";
 import { AppRoute, AuthStatus } from "../../const";
 
 const Login = (): JSX.Element => {

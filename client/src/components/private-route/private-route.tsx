@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
-import { getAuthStatus } from "../../redux/auth/selectors";
+import { getAuthStatus } from "../../redux/user/selectors";
 import { AppRoute, AuthStatus } from "../../const";
 
 type PrivateRouteProps = {

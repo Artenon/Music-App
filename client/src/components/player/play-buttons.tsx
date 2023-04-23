@@ -2,7 +2,7 @@ import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getIsPlaying, getFrom, getPosition } from "../../redux/track/selectors";
-import { getFavorites } from "../../redux/auth/selectors";
+import { getFavorites } from "../../redux/user/selectors";
 import { getSearchData, getAlbumData } from "../../redux/data/selectors";
 import actions from "../../redux/track/track-slice";
 import { From } from "../../const";

@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying, getIsAutoPlay, getFrom, getPosition } from "../../redux/track/selectors";
 import { getAlbumData, getSearchData } from "../../redux/data/selectors";
-import { getFavorites } from "../../redux/auth/selectors";
+import { getFavorites } from "../../redux/user/selectors";
 import { ProgressBar } from "./progressbar/progressbar";
 import { PlayButtons } from "./play-buttons";
 import { UserButtons } from "./user-buttons";

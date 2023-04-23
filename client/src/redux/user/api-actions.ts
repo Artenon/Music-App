@@ -12,7 +12,7 @@ export const registerAction = createAsyncThunk<DefaultResponse, User, {
   extra: AxiosInstance
 }
 >(
-  `${NameSpace.AUTH}/register`,
+  `${NameSpace.USER}/register`,
   async ({email, password, username}, {dispatch, extra: api}) => {
     const {data} = await api.post<DefaultResponse>(APIRoute.Register, {email, password, username});
     return data;
@@ -25,7 +25,7 @@ export const loginAction = createAsyncThunk<LoginResponse, User, {
   extra: AxiosInstance
 }
 >(
-  `${NameSpace.AUTH}/login`,
+  `${NameSpace.USER}/login`,
   async ({email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<LoginResponse>(APIRoute.Login, {email, password});
     return data;
@@ -38,7 +38,7 @@ export const logoutAction = createAsyncThunk<DefaultResponse, undefined, {
   extra: AxiosInstance
 }
 >(
-  `${NameSpace.AUTH}/logout`,
+  `${NameSpace.USER}/logout`,
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.delete<DefaultResponse>(APIRoute.Logout);
     return data;
@@ -51,7 +51,7 @@ export const getAuthStatus = createAsyncThunk<AuthResponse, undefined, {
   extra: AxiosInstance
 }
 >(
-  `${NameSpace.AUTH}/getAuthStatus`,
+  `${NameSpace.USER}/getAuthStatus`,
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<AuthResponse>(APIRoute.Login);
     return data;
@@ -64,7 +64,7 @@ export const addFavorite = createAsyncThunk<FavoriteResponse, SongData, {
   extra: AxiosInstance
 }
 >(
-  `${NameSpace.AUTH}/addFavorite`,
+  `${NameSpace.USER}/addFavorite`,
   async (favorite, {dispatch, extra: api}) => {
     const {data} = await api.post<FavoriteResponse>(APIRoute.Favorites, {favorite});
     return data;
@@ -77,7 +77,7 @@ export const removeFavorite = createAsyncThunk<FavoriteResponse, SongData, {
   extra: AxiosInstance
 }
 >(
-  `${NameSpace.AUTH}/removeFavorite`,
+  `${NameSpace.USER}/removeFavorite`,
   async (favorite, {dispatch, extra: api}) => {
     const {data} = await api.post<FavoriteResponse>(`${APIRoute.Favorites}${APIRoute.Remove}`, {favorite})
     return data;

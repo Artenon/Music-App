@@ -4,7 +4,7 @@ import { AppRoute, AuthStatus } from "../const";
 import { MainPage } from "../pages/main/main-page";
 import { LoginPage } from "../pages/login/login-page";
 import { useAppDispatch } from "../hooks/hooks";
-import { getAuthStatus } from "../redux/auth/api-actions";
+import { getAuthStatus } from "../redux/user/api-actions";
 import { AlbumPage } from "../pages/album/album-page";
 import { Player } from "../components/player/player";
 import { PrivateRoute } from "../components/private-route/private-route";

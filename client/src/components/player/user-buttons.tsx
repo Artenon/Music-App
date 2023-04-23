@@ -3,9 +3,9 @@ import { TbRepeatOff, TbRepeat } from "react-icons/tb";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getIsAutoPlay, getCurrentTrack } from "../../redux/track/selectors";
-import { getFavorites, getAuthStatus } from "../../redux/auth/selectors";
+import { getFavorites, getAuthStatus } from "../../redux/user/selectors";
 import actions from "../../redux/track/track-slice";
-import { addFavorite, removeFavorite } from "../../redux/auth/api-actions";
+import { addFavorite, removeFavorite } from "../../redux/user/api-actions";
 import { AuthStatus } from "../../const";
 
 const { changeAutoPlay } = actions;

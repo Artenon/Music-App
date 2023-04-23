@@ -17,8 +17,8 @@ const initialState: {
   favorites: [],
 };
 
-export const authSlice = createSlice({
-  name: NameSpace.AUTH,
+export const userSlice = createSlice({
+  name: NameSpace.USER,
   initialState,
   reducers: {},
   extraReducers(builder) {

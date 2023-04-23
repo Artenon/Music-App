@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ColorRing } from "react-loader-spinner";
 import { faUserLarge, faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { registerAction } from "../../redux/auth/api-actions";
-import { getIsLoading } from "../../redux/auth/selectors";
+import { registerAction } from "../../redux/user/api-actions";
+import { getIsLoading } from "../../redux/user/selectors";
 import { User } from '../../types/auth.types';
 import { AppRoute } from "../../const";
 

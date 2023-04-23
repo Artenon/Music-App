@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ColorRing } from "react-loader-spinner";
 import { faKey, faLock, faEnvelope, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { loginAction } from "../../redux/auth/api-actions";
-import { getIsLoading } from "../../redux/auth/selectors";
+import { loginAction } from "../../redux/user/api-actions";
+import { getIsLoading } from "../../redux/user/selectors";
 import { User } from '../../types/auth.types';
 import { AppRoute } from "../../const";
 
@@ -66,7 +66,6 @@ export const Login = (): JSX.Element => {
                   visible={true}
                   height="30"
                   width="30"
-                  ariaLabel="blocks-loading"
                   wrapperStyle={{"margin": "0 auto"}}
                   colors={['#B9BBB6', '#B9BBB6', '#B9BBB6', '#B9BBB6', '#B9BBB6']}
                 />
