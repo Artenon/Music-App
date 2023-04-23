@@ -54,7 +54,7 @@ export const Player = (): JSX.Element => {
           
         } else if (from === From.Favorites) {
 
-          if (favorites.length === 0) {
+          if (favorites.length <= 1) {
             dispatch(changeAutoPlay(false));
           } else if (position === favorites.length) {
             dispatch(changePosition(1));

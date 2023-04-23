@@ -46,7 +46,7 @@ export const PlayButtons = (): JSX.Element => {
       
     } else if (from === From.Favorites) {
 
-      if (favorites.length === 0) {
+      if (favorites.length <= 1) {
         dispatch(changeAutoPlay(false));
       } else if (position === 1) {
         dispatch(changePosition(favorites.length));
@@ -83,7 +83,7 @@ export const PlayButtons = (): JSX.Element => {
       
     } else if (from === From.Favorites) {
 
-      if (favorites.length === 0) {
+      if (favorites.length <= 1) {
         dispatch(changeAutoPlay(false));
       } else if (position === favorites.length) {
         dispatch(changePosition(1));
