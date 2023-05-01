@@ -8,6 +8,10 @@ export const getUsername = (state: RootState): string => state.USER.username;
 
 export const getFavorites = (state: RootState): Favorites => state.USER.favorites;
 
-export const getIsLoading = (state: RootState): boolean => state.USER.isLoading;
+export const getIsAuthLoading = (state: RootState): boolean => state.USER.isAuthLoading;
 
 export const getIsLoginLoading = (state: RootState): boolean => state.USER.isLoginLoading;
+
+export const getIsAddingFavTrack = (state: RootState): boolean => state.USER.isAddingFavTrack;
+
+export const getIsAddingFavAlbum = (state: RootState): boolean => state.USER.isAddingFavAlbum;

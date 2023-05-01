@@ -93,6 +93,12 @@ export const Player = (): JSX.Element => {
       };
     };
   }, [isPlaying]);
+  
+  useEffect(() => {
+    if (albumData === null) {
+      setIsShowing(false);
+    };
+  }, [albumData]);
 
   return (
     <div className={`

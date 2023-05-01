@@ -3,6 +3,7 @@ import { HiPause, HiPlay } from "react-icons/hi";
 import { SongData } from "../../types/song.types";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
+import { getFavorites } from "../../redux/user/selectors";
 import actions from "../../redux/track/track-slice";
 import { From } from "../../const";
 
@@ -13,7 +14,7 @@ type FavoriteSongProps = {
 
 const { changeIsPlaying, changeCurrentTrack, changeFrom, changePosition } = actions;
 
-export const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
+const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -75,6 +76,20 @@ export const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => 
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+export const FavoriteSongs = (): JSX.Element => {
+  const favorites = useAppSelector(getFavorites);
+  
+  return (
+    <div>
+      {
+        favorites.tracks.map((track, index) => (
+          <FavoriteSong key={track.id} track={track} index={index + 1} />
+        ))
+      }
     </div>
   );
 };

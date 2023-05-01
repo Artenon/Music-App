@@ -3,7 +3,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { BsFillHeartbreakFill } from "react-icons/bs";
 import { useAppSelector } from "../../hooks/hooks";
 import { getFavorites, getUsername } from "../../redux/user/selectors";
-import { FavoriteSong } from "../../components/favorite-song/favorite-song";
+import { FavoriteSongs } from "../../components/favorite-songs/favorite-songs";
 import { FavoriteAlbums } from "../../components/favorite-albums/favorite-albums";
 import { TabsFavorites } from "../../const";
 
@@ -83,10 +83,7 @@ export const FavoritesPage = (): JSX.Element => {
       </div>
       {
         activeTab === TabsFavorites.Tracks
-        ? 
-          favorites.tracks.map((item, index) => (
-            <FavoriteSong key={item.id} track={item} index={index + 1} />
-          ))
+        ? <FavoriteSongs />
         : <FavoriteAlbums />
       }
     </div>

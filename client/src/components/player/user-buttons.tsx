@@ -4,7 +4,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ColorRing } from "react-loader-spinner";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getIsAutoPlay, getCurrentTrack } from "../../redux/track/selectors";
-import { getFavorites, getAuthStatus, getIsLoading } from "../../redux/user/selectors";
+import { getFavorites, getAuthStatus, getIsAddingFavTrack } from "../../redux/user/selectors";
 import actions from "../../redux/track/track-slice";
 import { addFavoriteTrack, removeFavoriteTrack } from "../../redux/user/api-actions";
 import { AuthStatus } from "../../const";
@@ -20,7 +20,7 @@ export const UserButtons = (): JSX.Element => {
   const currentTrack = useAppSelector(getCurrentTrack);
   const favorites = useAppSelector(getFavorites);
   const authStatus = useAppSelector(getAuthStatus);
-  const isLoading = useAppSelector(getIsLoading);
+  const isAddingFavTrack = useAppSelector(getIsAddingFavTrack);
 
   const repeatHandler = () => {
     dispatch(changeAutoPlay(!isAutoPlay));
@@ -61,7 +61,7 @@ export const UserButtons = (): JSX.Element => {
         {
           authStatus === AuthStatus.Authorized
           ?
-            isLoading
+            isAddingFavTrack
             ?
               <ColorRing
                 visible={true}

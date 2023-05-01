@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
-import { getAuthStatus, getIsLoading } from "../../redux/user/selectors";
+import { getAuthStatus, getIsAuthLoading } from "../../redux/user/selectors";
 import { AppRoute, AuthStatus } from "../../const";
 import { Spinner } from "../spinner/spinner";
 
@@ -11,10 +11,10 @@ type PrivateRouteProps = {
 
 export const PrivateRoute = ({children, requiredAuthStatus}: PrivateRouteProps): JSX.Element => {
   const authStatus = useAppSelector(getAuthStatus);
-  const isLoading = useAppSelector(getIsLoading);
+  const isAuthLoading = useAppSelector(getIsAuthLoading);
   
   return (
-    isLoading
+    isAuthLoading
     ? <Spinner />
     : authStatus === requiredAuthStatus
       ? children
