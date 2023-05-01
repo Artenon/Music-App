@@ -15,14 +15,18 @@ import { saveToken, removeToken } from "../../service/user-storage";
 import { Favorites } from "../../types/auth.types";
 
 const initialState: {
-  isLoading: boolean;
+  isAuthLoading: boolean;
   isLoginLoading: boolean;
+  isAddingFavAlbum: boolean;
+  isAddingFavTrack: boolean;
   authStatus: AuthStatus;
   username: string;
   favorites: Favorites;
 } = {
-  isLoading: false,
+  isAuthLoading: false,
   isLoginLoading: false,
+  isAddingFavAlbum: false,
+  isAddingFavTrack: false,
   authStatus: AuthStatus.Unauthorized,
   username: '',
   favorites: {
@@ -77,57 +81,57 @@ export const userSlice = createSlice({
         removeToken();
       })
       .addCase(getAuthStatus.pending, (state) => {
-        state.isLoading = true;
+        state.isAuthLoading = true;
       })
       .addCase(getAuthStatus.fulfilled, (state, action) => {
         state.authStatus = action.payload.message;
         state.username = action.payload.username;
         state.favorites = action.payload.favorites;
-        state.isLoading = false;
+        state.isAuthLoading = false;
       })
       .addCase(getAuthStatus.rejected, (state) => {
         state.authStatus = AuthStatus.Unauthorized;
-        state.isLoading = false;
+        state.isAuthLoading = false;
       })
       .addCase(addFavoriteTrack.pending, (state) => {
-        state.isLoading = true;
+        state.isAddingFavTrack = true;
       })
       .addCase(addFavoriteTrack.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isAddingFavTrack = false;
         state.favorites = action.payload.favorites;
       })
       .addCase(addFavoriteTrack.rejected, (state) => {
-        state.isLoading = false;
+        state.isAddingFavTrack = false;
       })
       .addCase(removeFavoriteTrack.pending, (state) => {
-        state.isLoading = true;
+        state.isAddingFavTrack = true;
       })
       .addCase(removeFavoriteTrack.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isAddingFavTrack = false;
         state.favorites = action.payload.favorites;
       })
       .addCase(removeFavoriteTrack.rejected, (state) => {
-        state.isLoading = false;
+        state.isAddingFavTrack = false;
       })
       .addCase(addFavoriteAlbum.pending, (state) => {
-        state.isLoading = true;
+        state.isAddingFavAlbum = true;
       })
       .addCase(addFavoriteAlbum.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isAddingFavAlbum = false;
         state.favorites = action.payload.favorites;
       })
       .addCase(addFavoriteAlbum.rejected, (state) => {
-        state.isLoading = false;
+        state.isAddingFavAlbum = false;
       })
       .addCase(removeFavoriteAlbum.pending, (state) => {
-        state.isLoading = true;
+        state.isAddingFavAlbum = true;
       })
       .addCase(removeFavoriteAlbum.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isAddingFavAlbum = false;
         state.favorites = action.payload.favorites;
       })
       .addCase(removeFavoriteAlbum.rejected, (state) => {
-        state.isLoading = false;
+        state.isAddingFavAlbum = false;
       });
   }
 });

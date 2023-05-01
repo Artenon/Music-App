@@ -5,7 +5,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ColorRing } from "react-loader-spinner";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getAlbumData, getIsLoading } from "../../redux/data/selectors";
-import { getFavorites, getAuthStatus, getIsLoading as getIsUserLoading } from "../../redux/user/selectors";
+import { getFavorites, getAuthStatus, getIsAddingFavAlbum } from "../../redux/user/selectors";
 import { getAlbum } from "../../redux/data/api-actions";
 import { addFavoriteAlbum, removeFavoriteAlbum } from "../../redux/user/api-actions";
 import { Spinner } from "../../components/spinner/spinner";
@@ -19,7 +19,7 @@ export const AlbumPage = (): JSX.Element => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   
   const isLoading = useAppSelector(getIsLoading);
-  const isUserLoading = useAppSelector(getIsUserLoading);
+  const isAddingFavAlbum = useAppSelector(getIsAddingFavAlbum);
   const albumData = useAppSelector(getAlbumData);
   const favorites = useAppSelector(getFavorites);
   const authStatus = useAppSelector(getAuthStatus);
@@ -86,7 +86,7 @@ export const AlbumPage = (): JSX.Element => {
                 {
                   authStatus === AuthStatus.Authorized
                   ?
-                    isUserLoading
+                    isAddingFavAlbum
                     ?
                       <ColorRing
                         visible={true}
