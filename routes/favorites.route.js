@@ -12,7 +12,7 @@ router.post('/api/favorites/track', authMiddleware, async (req, res) => {
     user.favorites.tracks = [favorite].concat(user.favorites.tracks);
     await user.save();
 
-    res.status(200).json({ message: 'OK', favorites: user.favorites });
+    res.status(201).json({ message: 'OK', favorites: user.favorites });
   } catch (error) {
     res.status(500).json({ message: 'Couldn\'t add this song to your favorites' });
   }
@@ -26,6 +26,7 @@ router.post('/api/favorites/album', authMiddleware, async (req, res) => {
     user.favorites.albums = [favorite].concat(user.favorites.albums);
     await user.save();
 
+    res.status(201).json({ message: 'OK', favorites: user.favorites });
   } catch (error) {
     res.status(500).json({ message: 'Couldn\'t add this album to your favorites' });
   }
@@ -53,6 +54,7 @@ router.post('/api/favorites/album/remove', authMiddleware, async (req, res) => {
     user.favorites.albums = user.favorites.albums.filter(item => item.id !== favorite.id);
     await user.save();
  
+    res.status(200).json({ message: 'OK', favorites: user.favorites });
   } catch (error) {
     res.status(500).json({ message: 'Couldn\'t remove this album from your favorites' });
   }

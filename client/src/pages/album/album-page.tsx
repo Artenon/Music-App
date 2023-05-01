@@ -1,24 +1,56 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BiCopyright } from "react-icons/bi";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { ColorRing } from "react-loader-spinner";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getAlbumData, getIsLoading } from "../../redux/data/selectors";
+import { getFavorites, getAuthStatus, getIsLoading as getIsUserLoading } from "../../redux/user/selectors";
 import { getAlbum } from "../../redux/data/api-actions";
+import { addFavoriteAlbum, removeFavoriteAlbum } from "../../redux/user/api-actions";
 import { Spinner } from "../../components/spinner/spinner";
 import { AlbumSong } from "../../components/album-song/album-song";
+import { AuthStatus } from "../../const";
 
 export const AlbumPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { albumID } = useParams();
+
+  const [isLiked, setIsLiked] = useState<boolean>(false);
   
   const isLoading = useAppSelector(getIsLoading);
+  const isUserLoading = useAppSelector(getIsUserLoading);
   const albumData = useAppSelector(getAlbumData);
+  const favorites = useAppSelector(getFavorites);
+  const authStatus = useAppSelector(getAuthStatus);
+
+  const likeHandler = () => {
+    if (albumData) {
+      dispatch(addFavoriteAlbum(albumData));
+    };
+  };
+
+  const unlikeHandler = () => {
+    if (albumData) {
+      dispatch(removeFavoriteAlbum(albumData));
+    }
+  };
 
   useEffect(() => {
     if (albumID) {
       dispatch(getAlbum(albumID));
     };
   }, [dispatch, albumID]);
+
+  useEffect(() => {
+    if (albumID) {
+      if (favorites.albums.filter(item => item.id === Number(albumID)).length !== 0) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      };
+    };
+  }, [albumID, favorites.albums]);
 
   if (isLoading || !albumData) {
     return <Spinner />;
@@ -48,6 +80,25 @@ export const AlbumPage = (): JSX.Element => {
                 {albumData.genres.data.map(genre => (
                   <div key={genre.id} className="bg-white rounded-lg text-black p-1">{genre.name}</div>
                 ))}
+              </div>
+              <span className="text-white mx-1">&#183;</span>
+              <div className="cursor-pointer text-3xl">
+                {
+                  authStatus === AuthStatus.Authorized
+                  ?
+                    isUserLoading
+                    ?
+                      <ColorRing
+                        visible={true}
+                        height="30"
+                        width="30"
+                        colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
+                      />
+                    : isLiked
+                      ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
+                      : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
+                  : null
+                }
               </div>
             </div>
           </div>

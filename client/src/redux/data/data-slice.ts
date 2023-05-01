@@ -18,7 +18,11 @@ const initialState: {
 export const dataSlice = createSlice({
   name: NameSpace.DATA,
   initialState,
-  reducers: {},
+  reducers: {
+    addAlbumData: (state, action) => {
+      state.albumData = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(searchAction.pending, (state) => {
@@ -46,3 +50,5 @@ export const dataSlice = createSlice({
       });
   }
 });
+
+export default dataSlice.actions;

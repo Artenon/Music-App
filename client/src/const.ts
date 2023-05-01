@@ -29,7 +29,6 @@ export const toastifyOptions: ToastOptions = {
   theme: 'dark',
   position: 'bottom-right',
   autoClose: 2500,
-  toastId: 1,
 };
 
 export enum AuthStatus {
@@ -42,4 +41,9 @@ export enum From {
   Album = 'Album',
   Favorites = 'Favorites',
   None = 'None'
+};
+
+export enum TabsFavorites {
+  Tracks = 'Tracks',
+  Albums = 'Albums'
 };

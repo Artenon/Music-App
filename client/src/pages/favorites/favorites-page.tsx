@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsFillHeartbreakFill } from "react-icons/bs";
 import { useAppSelector } from "../../hooks/hooks";
 import { getFavorites, getUsername } from "../../redux/user/selectors";
 import { FavoriteSong } from "../../components/favorite-song/favorite-song";
+import { FavoriteAlbums } from "../../components/favorite-albums/favorite-albums";
+import { TabsFavorites } from "../../const";
 
 export const FavoritesPage = (): JSX.Element => {
+  const [activeTab, setActiveTab] = useState<TabsFavorites>(TabsFavorites.Tracks);
+
   const favorites = useAppSelector(getFavorites);
   const username = useAppSelector(getUsername);
 
@@ -26,7 +31,7 @@ export const FavoritesPage = (): JSX.Element => {
 
   return (
     <div className="p-8 pb-24">
-      <div className="text-white font-bold text-6xl flex items-center mb-8">
+      <div className="text-white font-bold text-6xl flex items-center mb-6">
         <div className={`
           w-[400px] h-[400px] rounded-xl shadow-extra
           flex items-center justify-center transition-all
@@ -56,10 +61,33 @@ export const FavoritesPage = (): JSX.Element => {
           </div>
         </div>
       </div>
+      <div className="flex gap-2 mb-4 text-white font-bold text-xl">
+        <div className={`
+          p-2 rounded-lg cursor-pointer transition-all 
+          hover:text-black hover:bg-white
+          ${activeTab === TabsFavorites.Tracks && "text-black bg-white"}
+          `}
+          onClick={() => setActiveTab(TabsFavorites.Tracks)}
+        >
+          {TabsFavorites.Tracks}
+        </div>
+        <div className={`
+          p-2 rounded-lg cursor-pointer transition-all 
+          hover:text-black hover:bg-white
+          ${activeTab === TabsFavorites.Albums && "text-black bg-white"}
+          `}
+          onClick={() => setActiveTab(TabsFavorites.Albums)}
+        >
+          {TabsFavorites.Albums}
+        </div>
+      </div>
       {
-        favorites.tracks.map((item, index) => (
-          <FavoriteSong key={item.id} track={item} index={index + 1} />
-        ))
+        activeTab === TabsFavorites.Tracks
+        ? 
+          favorites.tracks.map((item, index) => (
+            <FavoriteSong key={item.id} track={item} index={index + 1} />
+          ))
+        : <FavoriteAlbums />
       }
     </div>
   );
