@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
-import { AppRoute } from "../../const";
 import { Login } from "../../components/login/login";
 import { Register } from "../../components/login/register";
+import { AppRoute } from "../../const";
 
 export const LoginPage = (): JSX.Element => {
   const location = useLocation();

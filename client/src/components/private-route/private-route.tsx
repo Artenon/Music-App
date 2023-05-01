@@ -1,18 +1,23 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
-import { getAuthStatus } from "../../redux/user/selectors";
+import { getAuthStatus, getIsLoading } from "../../redux/user/selectors";
 import { AppRoute, AuthStatus } from "../../const";
+import { Spinner } from "../spinner/spinner";
 
 type PrivateRouteProps = {
   children: JSX.Element;
-  requiredAuthStatus: AuthStatus
+  requiredAuthStatus: AuthStatus;
 };
 
 export const PrivateRoute = ({children, requiredAuthStatus}: PrivateRouteProps): JSX.Element => {
   const authStatus = useAppSelector(getAuthStatus);
+  const isLoading = useAppSelector(getIsLoading);
+  
   return (
-    authStatus === requiredAuthStatus
-    ? children
-    : <Navigate to={AppRoute.Main} />
+    isLoading
+    ? <Spinner />
+    : authStatus === requiredAuthStatus
+      ? children
+      : <Navigate to={AppRoute.Main} />
   );
 };

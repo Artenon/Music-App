@@ -13,6 +13,7 @@ export enum APIRoute {
   Search = '/search?q=',
   Album = '/album',
   Favorites = '/favorites',
+  Track = '/track',
   Remove = '/remove',
 };
 
@@ -33,7 +34,7 @@ export const toastifyOptions: ToastOptions = {
 
 export enum AuthStatus {
   Authorized = 'Authorized',
-  Unauthorized = 'Unauthorized'
+  Unauthorized = 'Unauthorized',
 };
 
 export enum From {

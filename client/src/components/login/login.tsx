@@ -5,7 +5,7 @@ import { ColorRing } from "react-loader-spinner";
 import { faKey, faLock, faEnvelope, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { loginAction } from "../../redux/user/api-actions";
-import { getIsLoading } from "../../redux/user/selectors";
+import { getIsLoginLoading } from "../../redux/user/selectors";
 import { User } from '../../types/auth.types';
 import { AppRoute } from "../../const";
 
@@ -13,7 +13,7 @@ export const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState<User>({ email: '', password: '' });
-  const isLoading = useAppSelector(getIsLoading);
+  const isLoginLoading = useAppSelector(getIsLoginLoading);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -60,7 +60,7 @@ export const Login = (): JSX.Element => {
         </Link>
         <button type="submit" className="login__button">
           {
-            isLoading
+            isLoginLoading
             ? <div>
                 <ColorRing
                   visible={true}

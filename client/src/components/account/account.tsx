@@ -11,7 +11,7 @@ import { AppRoute, AuthStatus } from "../../const";
 
 const Login = (): JSX.Element => {
   return (
-    <Link className="flex items-center gap-2 p-2 rounded-lg transition-all hover:bg-white/10" to={AppRoute.Login}>
+    <Link className="flex items-center gap-2 p-2 rounded-lg transition-all hover:bg-white hover:text-gray-700" to={AppRoute.Login}>
       <FontAwesomeIcon icon={faRightToBracket} />Login
     </Link>
   );

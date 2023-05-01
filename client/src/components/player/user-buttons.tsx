@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getIsAutoPlay, getCurrentTrack } from "../../redux/track/selectors";
 import { getFavorites, getAuthStatus, getIsLoading } from "../../redux/user/selectors";
 import actions from "../../redux/track/track-slice";
-import { addFavorite, removeFavorite } from "../../redux/user/api-actions";
+import { addFavoriteTrack, removeFavoriteTrack } from "../../redux/user/api-actions";
 import { AuthStatus } from "../../const";
 
 const { changeAutoPlay } = actions;
@@ -28,19 +28,19 @@ export const UserButtons = (): JSX.Element => {
 
   const likeHandler = () => {
     if (currentTrack) {
-      dispatch(addFavorite(currentTrack));
+      dispatch(addFavoriteTrack(currentTrack));
     };
   };
 
   const unlikeHandler = () => {
     if (currentTrack) {
-      dispatch(removeFavorite(currentTrack));
+      dispatch(removeFavoriteTrack(currentTrack));
     }
   };
 
   useEffect(() => {
     if (currentTrack) {
-      if (favorites.filter(item => item.id === currentTrack.id).length !== 0) {
+      if (favorites.tracks.filter(item => item.id === currentTrack.id).length !== 0) {
         setIsLiked(true);
       } else {
         setIsLiked(false);

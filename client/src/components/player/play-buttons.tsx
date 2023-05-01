@@ -46,14 +46,14 @@ export const PlayButtons = (): JSX.Element => {
       
     } else if (from === From.Favorites) {
 
-      if (favorites.length <= 1) {
+      if (favorites.tracks.length <= 1) {
         dispatch(changeAutoPlay(false));
       } else if (position === 1) {
-        dispatch(changePosition(favorites.length));
-        dispatch(changeCurrentTrack(favorites[favorites.length - 1]));
+        dispatch(changePosition(favorites.tracks.length));
+        dispatch(changeCurrentTrack(favorites.tracks[favorites.tracks.length - 1]));
       } else {
         dispatch(changePosition(position - 1));
-        dispatch(changeCurrentTrack(favorites[position - 2]));
+        dispatch(changeCurrentTrack(favorites.tracks[position - 2]));
       };
 
     };
@@ -83,14 +83,14 @@ export const PlayButtons = (): JSX.Element => {
       
     } else if (from === From.Favorites) {
 
-      if (favorites.length <= 1) {
+      if (favorites.tracks.length <= 1) {
         dispatch(changeAutoPlay(false));
-      } else if (position === favorites.length) {
+      } else if (position === favorites.tracks.length) {
         dispatch(changePosition(1));
-        dispatch(changeCurrentTrack(favorites[0]));
+        dispatch(changeCurrentTrack(favorites.tracks[0]));
       } else {
         dispatch(changePosition(position + 1));
-        dispatch(changeCurrentTrack(favorites[position]));
+        dispatch(changeCurrentTrack(favorites.tracks[position]));
       };
 
     };

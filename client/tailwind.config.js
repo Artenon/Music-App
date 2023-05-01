@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       boxShadow: {
         'inner': 'inset 0 0 60px rgb(0 0 0)',
-        'extra': '0 5px 20px rgba(0 0 0 / .4)',
+        'extra': '0 2px 5px 1px rgba(0 0 0 / .4)',
         'cover': '0 0 4px rgba(0 0 0 / .6)',
       },
       dropShadow: {

@@ -22,7 +22,7 @@ export const AlbumPage = (): JSX.Element => {
 
   if (isLoading || !albumData) {
     return <Spinner />;
-  }
+  };
 
   const date = new Date(Date.parse(albumData.release_date)).toLocaleString("en-US", {
     year: 'numeric',
@@ -32,11 +32,11 @@ export const AlbumPage = (): JSX.Element => {
 
   return (
     <div className="flex flex-col text-white p-8 pb-24">
-      <div className="flex items-end mb-8">
+      <div className="flex mb-8">
         <img src={albumData.cover_big} className="w-[400px] h-[400px] rounded-xl shadow-extra" alt="cover" />
-        <div className="flex flex-col text-xl font-bold ml-8">
-          <p className="uppercase">{albumData.record_type}</p>
-          <p className="text-6xl my-4">{albumData.title}</p>
+        <div className="flex flex-col justify-end text-xl font-bold ml-8">
+          <div className="uppercase">{albumData.record_type}</div>
+          <div className="text-6xl my-4">{albumData.title}</div>
           <div className="flex items-center">
             <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
             <div className="ml-2 flex items-center">

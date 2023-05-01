@@ -54,14 +54,14 @@ export const Player = (): JSX.Element => {
           
         } else if (from === From.Favorites) {
 
-          if (favorites.length <= 1) {
+          if (favorites.tracks.length <= 1) {
             dispatch(changeAutoPlay(false));
-          } else if (position === favorites.length) {
+          } else if (position === favorites.tracks.length) {
             dispatch(changePosition(1));
-            dispatch(changeCurrentTrack(favorites[0]));
+            dispatch(changeCurrentTrack(favorites.tracks[0]));
           } else {
             dispatch(changePosition(position + 1));
-            dispatch(changeCurrentTrack(favorites[position]));
+            dispatch(changeCurrentTrack(favorites.tracks[position]));
           };
 
         };
