@@ -33,7 +33,7 @@ const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
     } else {
       dispatch(changeCurrentTrack({ ...track }));
       dispatch(changeIsPlaying(true));
-      dispatch(changeFrom(From.Favorites));
+      dispatch(changeFrom(From.FavoriteTracks));
       dispatch(changePosition(index));
       setIsActive(true);
     }

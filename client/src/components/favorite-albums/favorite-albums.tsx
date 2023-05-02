@@ -10,14 +10,15 @@ import { AppRoute, From } from "../../const";
 import actions from "../../redux/track/track-slice";
 import albumActions from "../../redux/data/data-slice";
 
-const { changeFrom, changeIsPlaying, changePosition, changeCurrentTrack } = actions;
+const { changeFrom, changeIsPlaying, changePosition, changeCurrentTrack, changeAlbumPosition } = actions;
 const { addAlbumData } = albumActions;
 
 type FavoriteAlbumProps = {
   item: AlbumData;
+  position: number;
 };
 
-const FavoriteAlbum = ({item}: FavoriteAlbumProps): JSX.Element => {
+const FavoriteAlbum = ({item, position}: FavoriteAlbumProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -36,9 +37,10 @@ const FavoriteAlbum = ({item}: FavoriteAlbumProps): JSX.Element => {
       setIsActive(false);
     } else {
       dispatch(changeIsPlaying(true));
-      dispatch(changeFrom(From.Album));
+      dispatch(changeFrom(From.FavoriteAlbums));
       dispatch(changeCurrentTrack(item.tracks[0]));
       dispatch(changePosition(1));
+      dispatch(changeAlbumPosition(position));
       dispatch(addAlbumData(item));
       setIsActive(true);
     };
@@ -110,8 +112,8 @@ export const FavoriteAlbums = (): JSX.Element => {
   return (
     <div className="flex flex-wrap gap-4">
       {
-        favorites.albums.map(item => (
-          <FavoriteAlbum key={item.id} item={item} />
+        favorites.albums.map((item, index) => (
+          <FavoriteAlbum key={item.id} item={item} position={index + 1} />
         ))
       }
     </div>
