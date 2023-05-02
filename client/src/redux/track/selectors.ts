@@ -10,4 +10,6 @@ export const getFrom = (state: RootState): From => state.TRACK.from;
 
 export const getPosition = (state: RootState): number => state.TRACK.position;
 
+export const getAlbumPosition = (state: RootState): number => state.TRACK.albumPosition;
+
 export const getIsAutoPlay = (state: RootState): boolean => state.TRACK.autoPlay;

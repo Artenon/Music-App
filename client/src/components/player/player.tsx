@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { getCurrentTrack, getIsPlaying, getIsAutoPlay, getFrom, getPosition } from "../../redux/track/selectors";
+import { getCurrentTrack, getIsPlaying, getIsAutoPlay, getFrom, getPosition, getAlbumPosition } from "../../redux/track/selectors";
 import { getAlbumData, getSearchData } from "../../redux/data/selectors";
 import { getFavorites } from "../../redux/user/selectors";
 import { ProgressBar } from "./progressbar/progressbar";
@@ -10,7 +10,7 @@ import { TrackInfo } from "./track-info";
 import { From } from "../../const";
 import actions from "../../redux/track/track-slice";
 
-const { changeIsPlaying, changeCurrentTrack, changePosition, changeAutoPlay } = actions;
+const { changeIsPlaying, changeCurrentTrack, changePosition, changeAutoPlay, changeAlbumPosition } = actions;
 
 export const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -24,6 +24,7 @@ export const Player = (): JSX.Element => {
   const isAutoPlay = useAppSelector(getIsAutoPlay);
   const from = useAppSelector(getFrom);
   const position = useAppSelector(getPosition);
+  const albumPosition = useAppSelector(getAlbumPosition);
   const searchData = useAppSelector(getSearchData);
   const albumData = useAppSelector(getAlbumData);
   const favorites = useAppSelector(getFavorites);
@@ -52,7 +53,7 @@ export const Player = (): JSX.Element => {
             dispatch(changeCurrentTrack(albumData?.tracks[position]));
           };
           
-        } else if (from === From.Favorites) {
+        } else if (from === From.FavoriteTracks) {
 
           if (favorites.tracks.length <= 1) {
             dispatch(changeAutoPlay(false));
@@ -64,6 +65,22 @@ export const Player = (): JSX.Element => {
             dispatch(changeCurrentTrack(favorites.tracks[position]));
           };
 
+        } else if (from === From.FavoriteAlbums) {
+          const albumsLength = favorites.albums.length;
+          
+          if (albumPosition === albumsLength && position === favorites.albums[albumsLength - 1].tracks.length) {
+            dispatch(changeAlbumPosition(1));
+            dispatch(changePosition(1));
+            dispatch(changeCurrentTrack(favorites.albums[0].tracks[0]));
+          } else if (position === favorites.albums[albumPosition - 1].tracks.length) {
+            dispatch(changeAlbumPosition(albumPosition + 1));
+            dispatch(changePosition(1));
+            dispatch(changeCurrentTrack(favorites.albums[albumPosition].tracks[0]));
+          } else {
+            dispatch(changePosition(position + 1));
+            dispatch(changeCurrentTrack(favorites.albums[albumPosition - 1].tracks[position]));
+          };
+    
         };
         dispatch(changeIsPlaying(true));
       } else {
@@ -80,7 +97,7 @@ export const Player = (): JSX.Element => {
         audio.removeEventListener('ended', endedHandler);
       };
     };
-  }, [albumData?.tracks, dispatch, favorites, from, isAutoPlay, position, searchData]);
+  }, [albumData?.tracks, albumPosition, dispatch, favorites, from, isAutoPlay, position, searchData]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -95,10 +112,10 @@ export const Player = (): JSX.Element => {
   }, [isPlaying]);
   
   useEffect(() => {
-    if (albumData === null) {
+    if (albumData === null && from === From.Album) {
       setIsShowing(false);
     };
-  }, [albumData]);
+  }, [albumData, from]);
 
   return (
     <div className={`

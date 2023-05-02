@@ -1,13 +1,13 @@
 import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { getIsPlaying, getFrom, getPosition } from "../../redux/track/selectors";
+import { getIsPlaying, getFrom, getPosition, getAlbumPosition } from "../../redux/track/selectors";
 import { getFavorites } from "../../redux/user/selectors";
 import { getSearchData, getAlbumData } from "../../redux/data/selectors";
 import actions from "../../redux/track/track-slice";
 import { From } from "../../const";
 
-const { changeIsPlaying, changeCurrentTrack, changePosition, changeAutoPlay } = actions;
+const { changeIsPlaying, changeCurrentTrack, changePosition, changeAutoPlay, changeAlbumPosition } = actions;
 
 export const PlayButtons = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -15,6 +15,7 @@ export const PlayButtons = (): JSX.Element => {
   const isPlaying = useAppSelector(getIsPlaying);
   const from = useAppSelector(getFrom);
   const position = useAppSelector(getPosition);
+  const albumPosition = useAppSelector(getAlbumPosition);
   const searchData = useAppSelector(getSearchData);
   const albumData = useAppSelector(getAlbumData);
   const favorites = useAppSelector(getFavorites);
@@ -44,7 +45,7 @@ export const PlayButtons = (): JSX.Element => {
         dispatch(changeCurrentTrack(albumData?.tracks[position - 2]));
       };
       
-    } else if (from === From.Favorites) {
+    } else if (from === From.FavoriteTracks) {
 
       if (favorites.tracks.length <= 1) {
         dispatch(changeAutoPlay(false));
@@ -56,7 +57,26 @@ export const PlayButtons = (): JSX.Element => {
         dispatch(changeCurrentTrack(favorites.tracks[position - 2]));
       };
 
+    } else if (from === From.FavoriteAlbums) {
+      
+      if (albumPosition === 1 && position === 1) {
+        const albumsLength = favorites.albums.length;
+        const lastAlbumTracksLength = favorites.albums[albumsLength - 1].tracks.length;
+        dispatch(changeAlbumPosition(albumsLength));
+        dispatch(changePosition(lastAlbumTracksLength));
+        dispatch(changeCurrentTrack(favorites.albums[albumsLength - 1].tracks[lastAlbumTracksLength - 1]));
+      } else if (position === 1) {
+        const prevTracksLength = favorites.albums[albumPosition - 2].tracks.length;
+        dispatch(changeAlbumPosition(albumPosition - 1));
+        dispatch(changePosition(prevTracksLength));
+        dispatch(changeCurrentTrack(favorites.albums[albumPosition - 2].tracks[prevTracksLength - 1]));
+      } else {
+        dispatch(changePosition(position - 1));
+        dispatch(changeCurrentTrack(favorites.albums[albumPosition - 1].tracks[position - 2]));
+      };
+
     };
+
     dispatch(changeIsPlaying(true));
   };
 
@@ -81,7 +101,7 @@ export const PlayButtons = (): JSX.Element => {
         dispatch(changeCurrentTrack(albumData?.tracks[position]));
       };
       
-    } else if (from === From.Favorites) {
+    } else if (from === From.FavoriteTracks) {
 
       if (favorites.tracks.length <= 1) {
         dispatch(changeAutoPlay(false));
@@ -91,6 +111,22 @@ export const PlayButtons = (): JSX.Element => {
       } else {
         dispatch(changePosition(position + 1));
         dispatch(changeCurrentTrack(favorites.tracks[position]));
+      };
+
+    } else if (from === From.FavoriteAlbums) {
+      const albumsLength = favorites.albums.length;
+      
+      if (albumPosition === albumsLength && position === favorites.albums[albumsLength - 1].tracks.length) {
+        dispatch(changeAlbumPosition(1));
+        dispatch(changePosition(1));
+        dispatch(changeCurrentTrack(favorites.albums[0].tracks[0]));
+      } else if (position === favorites.albums[albumPosition - 1].tracks.length) {
+        dispatch(changeAlbumPosition(albumPosition + 1));
+        dispatch(changePosition(1));
+        dispatch(changeCurrentTrack(favorites.albums[albumPosition].tracks[0]));
+      } else {
+        dispatch(changePosition(position + 1));
+        dispatch(changeCurrentTrack(favorites.albums[albumPosition - 1].tracks[position]));
       };
 
     };
