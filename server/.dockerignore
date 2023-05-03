@@ -1,0 +1,10 @@
+# server
+node_modules
+.git
+.gitignore
+Dockerfile
+.dockerignore
+
+# client
+client/node_modules
+client/.gitignore

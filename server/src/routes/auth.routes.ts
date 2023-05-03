@@ -1,10 +1,10 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { body, validationResult } from 'express-validator';
+import { body, validationResult, Result, ValidationError } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import config from 'config';
 import User from '../models/User.js';
 import authMiddleware from '../middleware/auth.middleware.js';
+import { Request } from '../../types';
 
 const router = Router();
 
@@ -16,13 +16,13 @@ router.post(
     body('password').isLength({ min: 6 }).withMessage('Password should be at least 6 chars long'),
     body('username').notEmpty()
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     try {
-      const errors = validationResult(req);
+      const errors: Result<ValidationError> = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({
           errors: errors.array(),
-          message: errors.errors[0].msg
+          message: errors/* .errors[0].msg */
         });
       };
 
@@ -44,10 +44,14 @@ router.post(
 
 /* login */
 router.route('/api/auth/login')
-  .get(authMiddleware, async (req, res) => {
+  .get(authMiddleware, async (req: Request, res: Response) => {
     try {
-      const user = await User.findById(req.user.userId);
-      res.status(200).json({ message: 'Authorized', username: user.username, favorites: user.favorites });
+      if (req.user) {
+        const user = await User.findById(req.user.userId);
+        if (user) {
+          res.status(200).json({ message: 'Authorized', username: user.username, favorites: user.favorites });
+        };
+      };
     } catch (error) {
       res.status(401).json({ message: 'Unauthorized' });
     }
@@ -57,13 +61,13 @@ router.route('/api/auth/login')
       body('email').isEmail().withMessage('Invalid email'),
       body('password').isLength({ min: 6 }).withMessage('Password should be at least 6 chars long')
     ],
-    async (req, res) => {
+    async (req: Request, res: Response) => {
       try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           return res.status(400).json({
             errors: errors.array(),
-            message: errors.errors[0].msg
+            message: errors/* .errors[0].msg */
           });
         };
 
@@ -79,9 +83,11 @@ router.route('/api/auth/login')
           return res.status(400).json({ message: 'Incorrect password' });
         };
 
+        const secret: string = process.env.SECRET_KEY!; 
+        
         const token = jwt.sign(
           { userId: user.id },
-          config.get('secretKey'),
+          secret,
           { expiresIn: '1d' }
         );
         
@@ -93,7 +99,7 @@ router.route('/api/auth/login')
     }
   );
 
-router.delete('/api/auth/logout', authMiddleware, (req, res) => {
+router.delete('/api/auth/logout', authMiddleware, (req: Request, res: Response) => {
   res.status(200).json({message: 'You have logged out'});
 });
 

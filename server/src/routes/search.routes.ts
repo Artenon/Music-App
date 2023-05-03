@@ -1,30 +1,55 @@
-import { Router } from "express";
-import axios from "axios";
-import config from "config";
+import { Router, Request, Response } from "express";
+import axios, { AxiosRequestConfig } from "axios";
+
+type Artist = {
+  id: number;
+  name: string;
+  picture_small: string;
+  type: string;
+};
+
+type Album = {
+  id: number;
+  title: string;
+  cover_small: string;
+  cover_medium: string;
+  type: string;
+};
+
+type SongData = {
+  id: number;
+  title: string;
+  title_short: string;
+  explicit_lyrics: boolean;
+  preview: string;
+  type: string;
+  artist: Artist;
+  album: Album;
+};
 
 const router = Router();
 
-router.get('/api/search', async (req, res) => {
+router.get('/api/search', async (req: Request, res: Response) => {
   try {
     const q = req.query.q;
 
-    const options = {
+    const options: AxiosRequestConfig = {
       params: {q},
       headers: {
-        'X-RapidAPI-Key': config.get('api-key'),
-        'X-RapidAPI-Host': config.get('api-host')
+        'X-RapidAPI-Key': process.env.API_KEY,
+        'X-RapidAPI-Host': process.env.API_HOST
       }
     };
 
     axios.get('https://deezerdevs-deezer.p.rapidapi.com/search', options)
       .then(response => {
-        const data = [];
+        const data: SongData[] = [];
 
         if (response.data.error) {
           return res.status(500).json({ message: response.data.error.message });
         };
 
-        response.data.data.forEach(item => {
+        response.data.data.forEach((item: SongData) => {
           const {
             id,
             title,

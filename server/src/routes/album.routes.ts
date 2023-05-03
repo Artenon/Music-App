@@ -1,17 +1,16 @@
-import { Router } from "express";
-import axios from "axios";
-import config from "config";
+import { Router, Request, Response } from "express";
+import axios, { AxiosRequestConfig } from "axios";
 
 const router = Router();
 
-router.get('/api/album/:albumID', (req, res) => {
+router.get('/api/album/:albumID', (req: Request, res: Response) => {
   try {
     const albumID = req.params.albumID;
 
-    const options = {
+    const options: AxiosRequestConfig = {
       headers: {
-        'X-RapidAPI-Key': config.get('api-key'),
-        'X-RapidAPI-Host': config.get('api-host')
+        'X-RapidAPI-Key': process.env.API_KEY,
+        'X-RapidAPI-Host': process.env.API_HOST
       }
     };
 
