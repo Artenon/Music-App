@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NameSpace, From } from "../../const";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 
 const initialState: {
   currentTrack: SongData | null;

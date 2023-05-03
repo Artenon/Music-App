@@ -1,5 +1,5 @@
 import { From } from "../../const";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 import { RootState } from "../../types/store.types"
 
 export const getCurrentTrack = (state: RootState): SongData | null => state.TRACK.currentTrack;

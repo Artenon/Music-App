@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 import actions from "../../redux/track/track-slice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";

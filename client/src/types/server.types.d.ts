@@ -1,7 +1,7 @@
 import { AuthStatus } from "../const";
 import { AlbumData } from "./album.types";
-import { SongData } from "./song.types";
 import { Favorites } from "./auth.types";
+import { SongData } from "../../../shared/types";
 
 export type DefaultResponse = {
   message: string;

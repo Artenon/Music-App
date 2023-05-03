@@ -2,7 +2,7 @@ import { AxiosInstance } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../types/store.types";
 import { SearchDataResponse, AlbumDataResponse } from "../../types/server.types";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 import { NameSpace, APIRoute } from "../../const";
 import { AlbumData } from "../../types/album.types";
 

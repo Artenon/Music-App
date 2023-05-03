@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { searchAction, getAlbum } from "./api-actions";
 import { NameSpace, toastifyOptions } from "../../const";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 import { AlbumData } from "../../types/album.types";
 
 const initialState: {

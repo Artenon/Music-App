@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { HiPause, HiPlay } from "react-icons/hi";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
 import { getFavorites } from "../../redux/user/selectors";

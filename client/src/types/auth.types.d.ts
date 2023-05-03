@@ -1,5 +1,5 @@
-import { SongData } from "./song.types";
 import { AlbumData } from "./album.types";
+import { SongData } from "../../../shared/types";
 
 export type User = {
   email: string,

@@ -1,31 +1,6 @@
 import { Router, Request, Response } from "express";
 import axios, { AxiosRequestConfig } from "axios";
-
-type Artist = {
-  id: number;
-  name: string;
-  picture_small: string;
-  type: string;
-};
-
-type Album = {
-  id: number;
-  title: string;
-  cover_small: string;
-  cover_medium: string;
-  type: string;
-};
-
-type SongData = {
-  id: number;
-  title: string;
-  title_short: string;
-  explicit_lyrics: boolean;
-  preview: string;
-  type: string;
-  artist: Artist;
-  album: Album;
-};
+import { SongData } from "../../../shared/types";
 
 const router = Router();
 

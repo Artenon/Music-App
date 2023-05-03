@@ -1,5 +1,5 @@
 import { RootState } from "../../types/store.types";
-import { SongData } from "../../types/song.types";
+import { SongData } from "../../../../shared/types";
 import { AlbumData } from "../../types/album.types";
 
 export const getIsLoading = (state: RootState): boolean => state.DATA.isLoading;
