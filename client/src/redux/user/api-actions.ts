@@ -72,15 +72,15 @@ export const addFavoriteTrack = createAsyncThunk<FavoriteResponse, SongData, {
   }
 );
 
-export const removeFavoriteTrack = createAsyncThunk<FavoriteResponse, SongData, {
+export const removeFavoriteTrack = createAsyncThunk<FavoriteResponse, number, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance
 }
 >(
   `${NameSpace.USER}/removeFavoriteTrack`,
-  async (favorite, {dispatch, extra: api}) => {
-    const {data} = await api.post<FavoriteResponse>(`${APIRoute.Favorites}${APIRoute.Track}${APIRoute.Remove}`, {favorite})
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.delete<FavoriteResponse>(`${APIRoute.Favorites}${APIRoute.Track}/${id}`);
     return data;
   }
 );
@@ -98,15 +98,15 @@ export const addFavoriteAlbum = createAsyncThunk<FavoriteResponse, AlbumData, {
   }
 );
 
-export const removeFavoriteAlbum = createAsyncThunk<FavoriteResponse, AlbumData, {
+export const removeFavoriteAlbum = createAsyncThunk<FavoriteResponse, number, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance
 }
 >(
   `${NameSpace.USER}/removeFavoriteAlbum`,
-  async (favorite, {dispatch, extra: api}) => {
-    const {data} = await api.post<FavoriteResponse>(`${APIRoute.Favorites}${APIRoute.Album}${APIRoute.Remove}`, {favorite})
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.delete<FavoriteResponse>(`${APIRoute.Favorites}${APIRoute.Album}/${id}`);
     return data;
   }
 );

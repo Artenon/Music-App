@@ -8,7 +8,7 @@ import { FavoriteAlbums } from "../../components/favorite-albums/favorite-albums
 import { TabsFavorites } from "../../const";
 
 export const FavoritesPage = (): JSX.Element => {
-  const [activeTab, setActiveTab] = useState<TabsFavorites>(TabsFavorites.Tracks);
+  const [activeTab, setActiveTab] = useState<TabsFavorites>(TabsFavorites.Songs);
 
   const favorites = useAppSelector(getFavorites);
   const username = useAppSelector(getUsername);
@@ -30,7 +30,7 @@ export const FavoritesPage = (): JSX.Element => {
   );
 
   return (
-    <div className="p-8 pb-24">
+    <div className="p-8 pb-28">
       <div className="text-white font-bold text-6xl flex items-center mb-6">
         <div className={`
           w-[400px] h-[400px] rounded-xl shadow-extra
@@ -65,11 +65,11 @@ export const FavoritesPage = (): JSX.Element => {
         <div className={`
           p-2 rounded-lg cursor-pointer transition-all 
           hover:text-black hover:bg-white
-          ${activeTab === TabsFavorites.Tracks && "text-black bg-white"}
+          ${activeTab === TabsFavorites.Songs && "text-black bg-white"}
           `}
-          onClick={() => setActiveTab(TabsFavorites.Tracks)}
+          onClick={() => setActiveTab(TabsFavorites.Songs)}
         >
-          {TabsFavorites.Tracks}
+          {TabsFavorites.Songs}
         </div>
         <div className={`
           p-2 rounded-lg cursor-pointer transition-all 
@@ -82,7 +82,7 @@ export const FavoritesPage = (): JSX.Element => {
         </div>
       </div>
       {
-        activeTab === TabsFavorites.Tracks
+        activeTab === TabsFavorites.Songs
         ? <FavoriteSongs />
         : <FavoriteAlbums />
       }

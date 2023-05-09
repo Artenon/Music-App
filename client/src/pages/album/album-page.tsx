@@ -32,7 +32,7 @@ export const AlbumPage = (): JSX.Element => {
 
   const unlikeHandler = () => {
     if (albumData) {
-      dispatch(removeFavoriteAlbum(albumData));
+      dispatch(removeFavoriteAlbum(albumData.id));
     }
   };
 
@@ -63,7 +63,7 @@ export const AlbumPage = (): JSX.Element => {
   });
 
   return (
-    <div className="flex flex-col text-white p-8 pb-24">
+    <div className="flex flex-col text-white p-8 pb-28">
       <div className="flex mb-8">
         <img src={albumData.cover_big} className="w-[400px] h-[400px] rounded-xl shadow-extra" alt="cover" />
         <div className="flex flex-col justify-end text-xl font-bold ml-8">

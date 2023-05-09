@@ -14,7 +14,6 @@ export enum APIRoute {
   Album = '/album',
   Favorites = '/favorites',
   Track = '/track',
-  Remove = '/remove',
 };
 
 export enum AppRoute {
@@ -45,6 +44,6 @@ export enum From {
 };
 
 export enum TabsFavorites {
-  Tracks = 'Tracks',
+  Songs = 'Songs',
   Albums = 'Albums'
 };

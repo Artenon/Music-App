@@ -34,7 +34,7 @@ export const UserButtons = (): JSX.Element => {
 
   const unlikeHandler = () => {
     if (currentTrack) {
-      dispatch(removeFavoriteTrack(currentTrack));
+      dispatch(removeFavoriteTrack(currentTrack.id));
     }
   };
 
