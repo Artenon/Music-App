@@ -1,0 +1,112 @@
+# REGISTER
+/api/auth/register:
+  post:
+    description: Create a new user
+    tags:
+      - Auth
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRegister'
+    responses:
+      201:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      400:
+        description: Wrong Data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+
+# LOGIN
+/api/auth/login:
+  get:
+    description: Get information about user
+    tags: 
+      - Auth
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+  post:
+    description: Login
+    tags:
+      - Auth
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserLogin'
+    responses:
+      201:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginResponse'
+      400:
+        description: Wrong Data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+
+# Logout
+/api/auth/logout:
+  delete:
+    description: Logout
+    tags: 
+      - Auth
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'

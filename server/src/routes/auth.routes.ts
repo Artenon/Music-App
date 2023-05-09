@@ -8,7 +8,7 @@ import { Request } from '../../types';
 
 const router = Router();
 
-/* register */
+/* REGISTER */
 router.post(
   '/api/auth/register',
   [
@@ -42,7 +42,7 @@ router.post(
     }
 });
 
-/* login */
+/* LOGIN */
 router.route('/api/auth/login')
   .get(authMiddleware, async (req: Request, res: Response) => {
     try {
@@ -100,7 +100,7 @@ router.route('/api/auth/login')
   );
 
 router.delete('/api/auth/logout', authMiddleware, (req: Request, res: Response) => {
-  res.status(200).json({message: 'You have logged out'});
+  res.status(200).json({ message: 'You have logged out' });
 });
 
 export default router;

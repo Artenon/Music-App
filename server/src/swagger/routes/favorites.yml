@@ -1,0 +1,159 @@
+# Add track to favorites
+/api/favorites/track:
+  post:
+    description: Add track to favorites, you need to be authorized to do that
+    tags:
+      - Favorites
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              favorite:
+                $ref: '#/components/schemas/Track'
+    responses:
+      201: 
+        description: Track added to favorites
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoritesResponse'
+      400:
+        description: Already in favorites
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+
+# Add album to favorites
+/api/favorites/album:
+  post:
+    description: Add album to favorites, you need to be authorized to do that
+    tags:
+      - Favorites
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              favorite:
+                $ref: '#/components/schemas/Track'
+    responses:
+      201: 
+        description: Album added to favorites
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoritesResponse'
+      400:
+        description: Already in favorites
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+
+# Remove track from favorites
+/api/favorites/track/{id}:
+  delete:
+    description: Remove track from favorites, you need to be authorized to do that
+    tags:
+      - Favorites
+    parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+      description: Favorite track's id
+    responses:
+      200: 
+        description: Track removed from favorites
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoritesResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      404:
+        description: Not found
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+
+# Remove album from favorites
+/api/favorites/album/{id}:
+  delete:
+    description: Remove album from favorites, you need to be authorized to do that
+    tags:
+      - Favorites
+    parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+      description: Favorite album's id
+    responses:
+      200: 
+        description: Album removed from favorites
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoritesResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      404:
+        description: Not found
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'

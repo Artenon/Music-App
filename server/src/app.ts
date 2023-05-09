@@ -4,24 +4,22 @@ import path from "path";
 import cors from "cors";
 import "dotenv/config";
 import swaggerUI from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
 import authRoutes from "./routes/auth.routes.js";
 import searchRoutes from "./routes/search.routes.js";
 import albumRoutes from "./routes/album.routes.js";
 import favoritesRoutes from "./routes/favorites.route.js";
+import { swaggerSpecs } from "./swagger/swagger.js";
 
 const __dirname = path.resolve();
 const app = express();
-
-const options = {
-  
-};
 
 mongoose.set('strictQuery', false);
 
 app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
+
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 
 app.use(authRoutes);
 app.use(searchRoutes);
@@ -40,7 +38,7 @@ async function start() {
   try {
     await mongoose.connect(process.env.MONGO_URI!);
   } catch (error) {
-    console.log('Server error', error);
+    console.log('Server error: ', error);
     process.exit(1);
   };
 };

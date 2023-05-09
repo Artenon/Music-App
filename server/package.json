@@ -8,11 +8,7 @@
   "scripts": {
     "start": "concurrently \"npm run ts:watch\" \"npm run node:dev\"",
     "ts:watch": "tsc -w",
-    "node:dev": "cross-env NODE_ENV=development nodemon",
-    "build": "tsc --build && cross-env NODE_ENV=production node build/app.js",
-    "client": "npm run start --prefix client",
-    "client:install": "npm install --prefix client",
-    "client:build": "npm run build --prefix client"
+    "node:dev": "cross-env NODE_ENV=development nodemon"
   },
   "author": "",
   "license": "ISC",

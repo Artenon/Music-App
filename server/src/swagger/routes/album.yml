@@ -1,0 +1,25 @@
+/api/album/{albumID}:
+  get:
+    description: Get information about specific album
+    tags:
+      - Album
+    parameters:
+    - in: path
+      name: albumID
+      required: true
+      schema:
+        type: integer
+      description: Album's ID
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'

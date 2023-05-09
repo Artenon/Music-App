@@ -1,0 +1,254 @@
+components:
+  schemas:
+    UserRegister:
+      type: object
+      required:
+        - email
+        - password
+        - username
+      properties:
+        email:
+          type: string
+          default: test@mail.com
+        password:
+          type: string
+          default: password
+        username:
+          type: string
+          default: username
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          default: test@mail.com
+        password:
+          type: string
+          default: password
+    Favorites:
+      type: object
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Track'
+        albums:
+          type: array
+          items:
+            $ref: '#/components/schemas/FavoriteAlbum'
+    LoginResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        token:
+          type: string
+        username:
+          type: string
+        favorites:
+          $ref: '#/components/schemas/Favorites'
+    DefaultResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    Album:
+      type: object
+      properties:
+        id: 
+          type: number
+        title: 
+          type: string
+        cover: 
+          type: string
+        cover_small: 
+          type: string
+        cover_medium: 
+          type: string
+        cover_big: 
+          type: string
+        cover_xl: 
+          type: string
+        md5_image: 
+          type: string
+        tracklist: 
+          type: string
+        type: 
+          type: string
+    Genres:
+      type: object
+      properties:
+        data:
+          type: array
+          items: 
+            type: object
+            properties:
+              id: 
+                type: number
+              name:
+                type: string
+              picture: 
+                type: string
+              type:
+                type: string
+    FavoriteAlbum:
+      type: object
+      properties:
+        id: 
+          type: number
+        title: 
+          type: string
+        cover_small: 
+          type: string
+        cover_medium: 
+          type: string
+        cover_big: 
+          type: string
+        genres: 
+          $ref: '#/components/schemas/Genres'
+        label: 
+          type: string
+        release_date: 
+          type: Date
+        record_type: 
+          type: string
+        explicit_lyrics: 
+          type: boolean
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Track'
+        artist:
+          $ref: '#/components/schemas/Artist'
+    Artist:
+      type: object
+      properties:
+        id: 
+          type: number
+        name:
+          type: string
+        picture_small: 
+          type: string
+        type: 
+          type: string
+    Track:
+      type: object
+      properties:
+        id:
+          type: number
+        readable:
+          type: boolean
+        title:
+          type: string
+        title_short:
+          type: string
+        title_version:
+          type: string
+        link:
+          type: string
+        duration:
+          type: number
+        rank:
+          type: number
+        explicit_lyrics:
+          type: boolean
+        explicit_content_lyrics:
+          type: number
+        explicit_content_cover:
+          type: number
+        preview:
+          type: string
+        md5_image:
+          type: string
+        artist:
+          type: object
+          properties:
+            id: 
+              type: number
+            name: 
+              type: string
+            tracklist: 
+              type: string
+            type: 
+              type: string
+        album:
+          $ref: '#/components/schemas/Album'
+        type:
+          type: string
+    SearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id: 
+                type: number
+              title: 
+                type: string
+              title_short:
+                type: string
+              explicit_lyrics:
+                type: boolean
+              preview:
+                type: string
+              type: 
+                type: string
+              artist:
+                $ref: '#/components/schemas/Artist'
+              album:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  title:
+                    type: string
+                  cover_small:
+                    type: string
+                  cover_medium:
+                    type: string
+                  type:
+                    type: string
+    AlbumResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: 
+              type: number
+            title: 
+              type: string
+            cover_small: 
+              type: string
+            cover_medium: 
+              type: string
+            cover_big: 
+              type: string
+            genres: 
+              $ref: '#/components/schemas/Genres'
+            label: 
+              type: string
+            release_date: 
+              type: string
+            record_type: 
+              type: string
+            explicit_lyrics: 
+              type: boolean
+            tracks:
+              type: array
+              items:
+                $ref: '#/components/schemas/Track'
+            artist:
+              $ref: '#/components/schemas/Artist'
+    FavoritesResponse:
+      type: object
+      properties:
+        message: 
+          type: string
+        favorites:
+          $ref: '#/components/schemas/Favorites'

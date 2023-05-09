@@ -1,0 +1,24 @@
+/api/search:
+  get:
+    description: Search
+    tags:
+      - Search
+    parameters:
+    - in: query
+      name: q
+      schema:
+        type: string
+      description: Search value
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
