@@ -82,6 +82,12 @@ const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
 
 export const FavoriteSongs = (): JSX.Element => {
   const favorites = useAppSelector(getFavorites);
+
+  if (favorites.tracks.length === 0) {
+    return (
+      <div className="text-white text-xl">Search and add your first song to favorites</div>
+    );
+  };
   
   return (
     <div>
