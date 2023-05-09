@@ -81,25 +81,29 @@ export const AlbumPage = (): JSX.Element => {
                   <div key={genre.id} className="bg-white rounded-lg text-black p-1">{genre.name}</div>
                 ))}
               </div>
-              <span className="text-white mx-1">&#183;</span>
-              <div className="cursor-pointer text-3xl">
-                {
-                  authStatus === AuthStatus.Authorized
-                  ?
-                    isAddingFavAlbum
-                    ?
-                      <ColorRing
-                        visible={true}
-                        height="30"
-                        width="30"
-                        colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
-                      />
-                    : isLiked
-                      ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
-                      : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
-                  : null
-                }
-              </div>
+              {
+                authStatus === AuthStatus.Authorized
+                ?
+                <div className="flex items-center">
+                  <span className="text-white mx-1">&#183;</span>
+                  <div className="cursor-pointer text-3xl">
+                    {
+                      isAddingFavAlbum
+                      ?
+                        <ColorRing
+                          visible={true}
+                          height="30"
+                          width="30"
+                          colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
+                        />
+                      : isLiked
+                        ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
+                        : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
+                    }
+                  </div>
+                </div>
+                : null
+              }
             </div>
           </div>
         </div>
