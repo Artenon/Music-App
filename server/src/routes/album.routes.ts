@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 const router = Router();
 
@@ -7,14 +7,7 @@ router.get('/api/album/:albumID', (req: Request, res: Response) => {
   try {
     const albumID = req.params.albumID;
 
-    const options: AxiosRequestConfig = {
-      headers: {
-        'X-RapidAPI-Key': process.env.API_KEY,
-        'X-RapidAPI-Host': process.env.API_HOST
-      }
-    };
-
-    axios.get(`https://deezerdevs-deezer.p.rapidapi.com/album/${albumID}`, options)
+    axios.get(`${process.env.API_URL}/album/${albumID}`)
       .then(response => {
         if (response.data.error) {
           return res.status(500).json({ message: response.data.error.message });

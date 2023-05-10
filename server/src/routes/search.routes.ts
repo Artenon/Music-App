@@ -9,14 +9,10 @@ router.get('/api/search', async (req: Request, res: Response) => {
     const q = req.query.q;
 
     const options: AxiosRequestConfig = {
-      params: {q},
-      headers: {
-        'X-RapidAPI-Key': process.env.API_KEY,
-        'X-RapidAPI-Host': process.env.API_HOST
-      }
+      params: {q}
     };
 
-    axios.get('https://deezerdevs-deezer.p.rapidapi.com/search', options)
+    axios.get(`${process.env.API_URL}/search`, options)
       .then(response => {
         const data: SongData[] = [];
 
