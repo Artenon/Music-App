@@ -110,7 +110,7 @@ export const AlbumPage = (): JSX.Element => {
       </div>
 
       {
-        albumData.tracks.map((track, index) => {
+        albumData.tracks.data.map((track, index) => {
           return (
             <AlbumSong key={track.id} track={track} index={index + 1} album={albumData} />
           );

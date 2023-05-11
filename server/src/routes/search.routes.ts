@@ -14,59 +14,11 @@ router.get('/api/search', async (req: Request, res: Response) => {
 
     await axios.get(`${process.env.API_URL}/search`, options)
       .then(response => {
-        const data: SongData[] = [];
-
         if (response.data.error) {
           return res.status(500).json({ message: response.data.error.message });
         };
 
-        response.data.data.forEach((item: SongData) => {
-          const {
-            id,
-            title,
-            title_short,
-            explicit_lyrics,
-            preview,
-            type,
-            artist: {
-              id: artist_id,
-              name,
-              picture_small,
-              type: artist_type
-            },
-            album: {
-              id: album_id,
-              title: album_title,
-              cover_small,
-              cover_medium,
-              type: album_type
-            }
-          } = item;
-
-          data.push({
-            id,
-            title,
-            title_short,
-            explicit_lyrics,
-            preview,
-            type,
-            artist: {
-              id: artist_id,
-              name,
-              picture_small,
-              type: artist_type
-            },
-            album: {
-              id: album_id,
-              title: album_title,
-              cover_small,
-              cover_medium,
-              type: album_type
-            }
-          });
-        });
-
-        res.status(200).json({data});
+        res.status(200).json({data: response.data.data});
       })
       .catch(error => {
         console.log(error);
