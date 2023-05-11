@@ -1,4 +1,4 @@
-export type Artist = {
+export type ArtistInSearch = {
   id: number;
   name: string;
   picture_small: string;
@@ -20,6 +20,23 @@ export type SongData = {
   explicit_lyrics: boolean;
   preview: string;
   type: string;
-  artist: Artist;
+  artist: ArtistInSearch;
   album: Album;
 };
+
+export type Artist = {
+  id: number;
+  name: string;
+  link: string;
+  share: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  nb_album: number;
+  nb_fan: number;
+  radio: boolean;
+  tracklist: string;
+  type: string;
+}

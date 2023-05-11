@@ -4,11 +4,12 @@ import path from "path";
 import cors from "cors";
 import "dotenv/config";
 import swaggerUI from "swagger-ui-express";
+import { swaggerSpecs } from "./swagger/swagger.js";
 import authRoutes from "./routes/auth.routes.js";
 import searchRoutes from "./routes/search.routes.js";
 import albumRoutes from "./routes/album.routes.js";
 import favoritesRoutes from "./routes/favorites.route.js";
-import { swaggerSpecs } from "./swagger/swagger.js";
+import artistRoutes from "./routes/artist.routes.js";
 
 const __dirname = path.resolve();
 const app = express();
@@ -25,6 +26,7 @@ app.use(authRoutes);
 app.use(searchRoutes);
 app.use(albumRoutes);
 app.use(favoritesRoutes);
+app.use(artistRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, '../../client', 'build')));

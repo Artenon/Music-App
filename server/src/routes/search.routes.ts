@@ -12,7 +12,7 @@ router.get('/api/search', async (req: Request, res: Response) => {
       params: {q}
     };
 
-    axios.get(`${process.env.API_URL}/search`, options)
+    await axios.get(`${process.env.API_URL}/search`, options)
       .then(response => {
         const data: SongData[] = [];
 

@@ -3,11 +3,11 @@ import axios from "axios";
 
 const router = Router();
 
-router.get('/api/album/:albumID', (req: Request, res: Response) => {
+router.get('/api/album/:albumID', async (req: Request, res: Response) => {
   try {
     const albumID = req.params.albumID;
 
-    axios.get(`${process.env.API_URL}/album/${albumID}`)
+    await axios.get(`${process.env.API_URL}/album/${albumID}`)
       .then(response => {
         if (response.data.error) {
           return res.status(500).json({ message: response.data.error.message });
