@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { HiArrowCircleRight } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import { getFavorites } from "../../redux/user/selectors";
 import { AlbumData } from "../../types/album.types";
 import { AppRoute } from "../../const";
@@ -11,41 +11,35 @@ type FavoriteAlbumProps = {
 };
 
 const FavoriteAlbum = ({item}: FavoriteAlbumProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-
-  const [isActive, setIsActive] = useState<boolean>(false);
-
   return (
     <div
       className="
         w-[250px]
         flex flex-col
         bg-white/5 text-white
-        rounded-lg
-        p-4"
+        rounded-lg p-4"
     >
-      <div className="relative group/cover cursor-pointer h-[218px]">
-        <img src={item.cover_medium}
-          className={`rounded-md transition-all group-hover/cover:scale-95 ${isActive && "scale-95"}`} alt="cover"
+      <Link to={`${AppRoute.Album}/${item.id}`} className="relative group/cover cursor-pointer h-[218px]">
+        <img
+          src={item.cover_medium}
+          className={`rounded-md transition-all group-hover/cover:scale-95`} alt="cover"
         />
         <div className={`
-            ${isActive && "shadow-inner"}
-            group-hover/cover:shadow-inner
-            rounded-md
-            w-full h-full 
-            absolute inset-0 
-            duration-150`}
+          rounded-md group-hover/cover:shadow-inner
+          w-full h-full
+          absolute inset-0
+          transition-all`}
         >
-          <div className={`
-            ${!isActive && "opacity-0"}
-            group-hover/cover:opacity-100
-            transition-all ease-in
-            absolute bottom-2 right-2`}
+          <div
+            className={`
+              group-hover/cover:opacity-100 opacity-0
+              transition-all ease-in
+              absolute bottom-2 right-2`}
           >
-            
+            <HiArrowCircleRight className="text-5xl" />
           </div>
         </div>
-      </div>
+      </Link>
       <div className="flex mt-2 items-center">
         {item.explicit_lyrics && <BsFillExplicitFill className="mr-1 text-sm" />}
         <div className="track truncate hover:underline">
