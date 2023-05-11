@@ -1,58 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { HiPlay, HiPause } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getFavorites } from "../../redux/user/selectors";
-import { getIsPlaying, getCurrentTrack } from "../../redux/track/selectors";
 import { AlbumData } from "../../types/album.types";
-import { AppRoute, From } from "../../const";
-import actions from "../../redux/track/track-slice";
-import albumActions from "../../redux/data/data-slice";
-
-const { changeFrom, changeIsPlaying, changePosition, changeCurrentTrack, changeAlbumPosition } = actions;
-const { addAlbumData } = albumActions;
+import { AppRoute } from "../../const";
 
 type FavoriteAlbumProps = {
   item: AlbumData;
-  position: number;
 };
 
-const FavoriteAlbum = ({item, position}: FavoriteAlbumProps): JSX.Element => {
+const FavoriteAlbum = ({item}: FavoriteAlbumProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [isActive, setIsActive] = useState<boolean>(false);
-
-  const isPlaying = useAppSelector(getIsPlaying);
-  const currentTrack = useAppSelector(getCurrentTrack);
-
-  const isCurrentAlbum = currentTrack?.album.id === item.id;
-
-  const playClickHandler = () => {
-    if (isCurrentAlbum && !isPlaying) {
-      dispatch(changeIsPlaying(true));
-      setIsActive(true);
-    } else if (isCurrentAlbum) {
-      dispatch(changeIsPlaying(false));
-      setIsActive(false);
-    } else {
-      dispatch(changeIsPlaying(true));
-      dispatch(changeFrom(From.FavoriteAlbums));
-      dispatch(changeCurrentTrack(item.tracks[0]));
-      dispatch(changePosition(1));
-      dispatch(changeAlbumPosition(position));
-      dispatch(addAlbumData(item));
-      setIsActive(true);
-    };
-  };
-
-  useEffect(() => {
-    if (!isCurrentAlbum) {
-      setIsActive(false);
-    } else if (isCurrentAlbum && isPlaying) {
-      setIsActive(true);
-    }
-  }, [isCurrentAlbum, isPlaying]);
 
   return (
     <div
@@ -63,7 +24,7 @@ const FavoriteAlbum = ({item, position}: FavoriteAlbumProps): JSX.Element => {
         rounded-lg
         p-4"
     >
-      <div className="relative group/cover cursor-pointer h-[218px]" onClick={playClickHandler}>
+      <div className="relative group/cover cursor-pointer h-[218px]">
         <img src={item.cover_medium}
           className={`rounded-md transition-all group-hover/cover:scale-95 ${isActive && "scale-95"}`} alt="cover"
         />
@@ -81,11 +42,7 @@ const FavoriteAlbum = ({item, position}: FavoriteAlbumProps): JSX.Element => {
             transition-all ease-in
             absolute bottom-2 right-2`}
           >
-            {
-              isCurrentAlbum && isPlaying
-              ? <HiPause className="text-5xl" /> 
-              : <HiPlay className="text-5xl" />
-            }
+            
           </div>
         </div>
       </div>
@@ -112,8 +69,8 @@ export const FavoriteAlbums = (): JSX.Element => {
   return (
     <div className="flex flex-wrap gap-4">
       {
-        favorites.albums.map((item, index) => (
-          <FavoriteAlbum key={item.id} item={item} position={index + 1} />
+        favorites.albums.map((item) => (
+          <FavoriteAlbum key={item.id} item={item} />
         ))
       }
     </div>

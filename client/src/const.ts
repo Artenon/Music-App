@@ -35,14 +35,6 @@ export enum AuthStatus {
   Unauthorized = 'Unauthorized',
 };
 
-export enum From {
-  Search = 'Search',
-  Album = 'Album',
-  FavoriteTracks = 'FavoriteTracks',
-  FavoriteAlbums = 'FavoriteAlbums',
-  None = 'None'
-};
-
 export enum TabsFavorites {
   Songs = 'Songs',
   Albums = 'Albums'

@@ -5,15 +5,16 @@ import { BsFillExplicitFill } from "react-icons/bs";
 import { SongData } from "../../../../shared/types";
 import actions from "../../redux/track/track-slice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
-import { AppRoute, From } from "../../const";
+import { getCurrentTrack, getIsPlaying, getQueue } from "../../redux/track/selectors";
+import { getSearchData } from "../../redux/data/selectors";
+import { AppRoute } from "../../const";
 
 type CardProps = {
   item: SongData;
   index: number;
 };
 
-const { changeCurrentTrack, changeIsPlaying, changeFrom, changePosition } = actions;
+const { changeCurrentTrack, changeIsPlaying, changePosition, changeQueue } = actions;
 
 export const Card = ({item, index}: CardProps): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
 
   const isPlaying = useAppSelector(getIsPlaying);
   const currentTrack = useAppSelector(getCurrentTrack);
+  const queue = useAppSelector(getQueue);
+  const searchData = useAppSelector(getSearchData);
   const isCurrentTrack = currentTrack?.id === item.id;
 
   const playClickHandler = () => {
@@ -32,9 +35,12 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
       dispatch(changeIsPlaying(false));
       setIsActive(false);
     } else {
+      if (searchData !== queue) {
+        dispatch(changeQueue(searchData));
+      };
+
       dispatch(changeCurrentTrack(item));
       dispatch(changeIsPlaying(true));
-      dispatch(changeFrom(From.Search));
       dispatch(changePosition(index));
       setIsActive(true);
     };

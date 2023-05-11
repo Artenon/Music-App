@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { Track, AlbumData } from "../../types/album.types";
-import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
+import { getCurrentTrack, getIsPlaying, getQueue } from "../../redux/track/selectors";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import actions from "../../redux/track/track-slice";
-import { From } from "../../const";
 
-const { changeCurrentTrack, changeIsPlaying, changeFrom, changePosition } = actions;
+const { changeCurrentTrack, changeIsPlaying, changePosition, changeQueue } = actions;
 
 type AlbumSongProps = {
   track: Track;
@@ -21,6 +20,7 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
 
   const isPlaying = useAppSelector(getIsPlaying);
   const currentTrack = useAppSelector(getCurrentTrack);
+  const queue = useAppSelector(getQueue);
   const isCurrentTrack = currentTrack?.id === track.id;
 
   const handleClick = () => {
@@ -31,6 +31,10 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
       dispatch(changeIsPlaying(false));
       setIsActive(false);
     } else {
+      if (album.tracks !== queue) {
+        dispatch(changeQueue(album.tracks));
+      };
+
       dispatch(changeCurrentTrack({
         ...track,
         artist: album.artist,
@@ -42,7 +46,6 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
         }
       }));
       dispatch(changeIsPlaying(true));
-      dispatch(changeFrom(From.Album));
       dispatch(changePosition(index));
       setIsActive(true);
     }

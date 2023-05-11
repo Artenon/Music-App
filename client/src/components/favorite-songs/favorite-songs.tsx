@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { HiPause, HiPlay } from "react-icons/hi";
 import { SongData } from "../../../../shared/types";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { getCurrentTrack, getIsPlaying } from "../../redux/track/selectors";
+import { getCurrentTrack, getIsPlaying, getQueue } from "../../redux/track/selectors";
 import { getFavorites } from "../../redux/user/selectors";
 import actions from "../../redux/track/track-slice";
-import { From } from "../../const";
 
 type FavoriteSongProps = {
   track: SongData;
   index: number;
 };
 
-const { changeIsPlaying, changeCurrentTrack, changeFrom, changePosition } = actions;
+const { changeIsPlaying, changeCurrentTrack, changePosition, changeQueue } = actions;
 
 const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -21,6 +20,8 @@ const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
 
   const currentTrack = useAppSelector(getCurrentTrack);
   const isPlaying = useAppSelector(getIsPlaying);
+  const queue = useAppSelector(getQueue);
+  const favorites = useAppSelector(getFavorites);
   const isCurrentTrack = currentTrack?.id === track.id;
 
   const handleClick = () => {
@@ -31,9 +32,12 @@ const FavoriteSong = ({track, index}: FavoriteSongProps): JSX.Element => {
       dispatch(changeIsPlaying(false));
       setIsActive(false);
     } else {
+      if (favorites.tracks !== queue) {
+        dispatch(changeQueue(favorites.tracks));
+      };
+
       dispatch(changeCurrentTrack({ ...track }));
       dispatch(changeIsPlaying(true));
-      dispatch(changeFrom(From.FavoriteTracks));
       dispatch(changePosition(index));
       setIsActive(true);
     }

@@ -1,21 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { NameSpace, From } from "../../const";
+import { NameSpace } from "../../const";
 import { SongData } from "../../../../shared/types";
 
 const initialState: {
   currentTrack: SongData | null;
   isPlaying: boolean;
-  from: From;
   position: number;
-  albumPosition: number;
   autoPlay: boolean;
+  queue: SongData[];
 } = {
   currentTrack: null,
   isPlaying: false,
-  from: From.None,
   position: 0,
-  albumPosition: 0,
   autoPlay: false,
+  queue: [],
 };
 
 export const trackSlice = createSlice({
@@ -28,18 +26,18 @@ export const trackSlice = createSlice({
     changeIsPlaying: (state, action) => {
       state.isPlaying = action.payload;
     },
-    changeFrom: (state, action) => {
-      state.from = action.payload;
-    },
     changePosition: (state, action) => {
       state.position = action.payload;
     },
-    changeAlbumPosition: (state, action) => {
-      state.albumPosition = action.payload;
-    },
     changeAutoPlay: (state, action) => {
       state.autoPlay = action.payload;
-    }
+    },
+    clearQueue: (state) => {
+      state.queue = [];
+    },
+    changeQueue: (state, action) => {
+      state.queue = action.payload;
+    },
   },
 });
 
