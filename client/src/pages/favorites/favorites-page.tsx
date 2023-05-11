@@ -1,17 +1,21 @@
-import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsFillHeartbreakFill } from "react-icons/bs";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getFavorites, getUsername } from "../../redux/user/selectors";
 import { FavoriteSongs } from "../../components/favorite-songs/favorite-songs";
 import { FavoriteAlbums } from "../../components/favorite-albums/favorite-albums";
+import { getTab } from "../../redux/track/selectors";
 import { TabsFavorites } from "../../const";
+import actions from "../../redux/track/track-slice";
+
+const { changeTab } = actions;
 
 export const FavoritesPage = (): JSX.Element => {
-  const [activeTab, setActiveTab] = useState<TabsFavorites>(TabsFavorites.Songs);
+  const dispatch = useAppDispatch();
 
   const favorites = useAppSelector(getFavorites);
   const username = useAppSelector(getUsername);
+  const tab = useAppSelector(getTab);
 
   const tracksLength: string = (
     favorites.tracks.length === 0
@@ -65,24 +69,24 @@ export const FavoritesPage = (): JSX.Element => {
         <div className={`
           p-2 rounded-lg cursor-pointer transition-all 
           hover:text-black hover:bg-white
-          ${activeTab === TabsFavorites.Songs && "text-black bg-white"}
+          ${tab === TabsFavorites.Songs && "text-black bg-white"}
           `}
-          onClick={() => setActiveTab(TabsFavorites.Songs)}
+          onClick={() => dispatch(changeTab(TabsFavorites.Songs))}
         >
           {TabsFavorites.Songs}
         </div>
         <div className={`
           p-2 rounded-lg cursor-pointer transition-all 
           hover:text-black hover:bg-white
-          ${activeTab === TabsFavorites.Albums && "text-black bg-white"}
+          ${tab === TabsFavorites.Albums && "text-black bg-white"}
           `}
-          onClick={() => setActiveTab(TabsFavorites.Albums)}
+          onClick={() => dispatch(changeTab(TabsFavorites.Albums))}
         >
           {TabsFavorites.Albums}
         </div>
       </div>
       {
-        activeTab === TabsFavorites.Songs
+        tab === TabsFavorites.Songs
         ? <FavoriteSongs />
         : <FavoriteAlbums />
       }

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { NameSpace } from "../../const";
+import { NameSpace, TabsFavorites } from "../../const";
 import { SongData } from "../../../../shared/types";
 
 const initialState: {
@@ -8,12 +8,14 @@ const initialState: {
   position: number;
   autoPlay: boolean;
   queue: SongData[];
+  tab: TabsFavorites;
 } = {
   currentTrack: null,
   isPlaying: false,
   position: 0,
   autoPlay: false,
   queue: [],
+  tab: TabsFavorites.Songs,
 };
 
 export const trackSlice = createSlice({
@@ -37,6 +39,9 @@ export const trackSlice = createSlice({
     },
     changeQueue: (state, action) => {
       state.queue = action.payload;
+    },
+    changeTab: (state, action) => {
+      state.tab = action.payload;
     },
   },
 });
