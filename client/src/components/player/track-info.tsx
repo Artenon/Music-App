@@ -20,7 +20,9 @@ export const TrackInfo = (): JSX.Element => {
           </div>
         </div>
         <div className="additional_info text-white/60 truncate">
-          {currentTrack?.artist.name}
+          <Link className="text-white/60 hover:text-white transition-all" to={`${AppRoute.Artist}/${currentTrack?.artist.id}`}>
+            {currentTrack?.artist.name}
+          </Link>
           <span className="text-white mx-1">&#183;</span>
           <Link className="text-white/60 hover:text-white transition-all" to={`${AppRoute.Album}/${currentTrack?.album.id}`}>
             {currentTrack?.album.title}

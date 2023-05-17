@@ -1,0 +1,31 @@
+/api/artist/{artistID}:
+  get:
+    description: Get information about specific artist
+    tags:
+      - Artist
+    parameters:
+    - in: path
+      name: artistID
+      required: true
+      schema:
+        type: integer
+      description: Artist's ID
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArtistResponse'
+      400:
+        description: This artist does not exist
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'

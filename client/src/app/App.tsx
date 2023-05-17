@@ -6,6 +6,7 @@ import { AlbumPage } from "../pages/album/album-page";
 import { Player } from "../components/player/player";
 import { PrivateRoute } from "../components/private-route/private-route";
 import { FavoritesPage } from "../pages/favorites/favorites-page";
+import { ArtistPage } from "../pages/artist/artist-page";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <FavoritesPage />
             </PrivateRoute>
           } />
+          <Route path={`${AppRoute.Artist}/:artistID`} element={ <ArtistPage /> } />
         </Routes>
         <Player />
       </div>

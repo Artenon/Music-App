@@ -1,18 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { searchAction, getAlbum } from "./api-actions";
+import { searchAction, getAlbum, getArtist, getArtistTotal } from "./api-actions";
 import { NameSpace, toastifyOptions } from "../../const";
 import { SongData } from "../../../../shared/types";
 import { AlbumData } from "../../types/album.types";
+import { ArtistData } from "../../types/artist.types";
 
 const initialState: {
   isLoading: boolean;
   searchData: SongData[];
   albumData: AlbumData | null;
+  artistData: ArtistData | null;
 } = {
   isLoading: false,
   searchData: [],
   albumData: null,
+  artistData: null,
 };
 
 export const dataSlice = createSlice({
@@ -41,6 +44,17 @@ export const dataSlice = createSlice({
         state.albumData = action.payload;
       })
       .addCase(getAlbum.rejected, (state) => {
+        state.isLoading = false;
+        toast.error('Error occurred', toastifyOptions);
+      })
+      .addCase(getArtist.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getArtist.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.artistData = action.payload;
+      })
+      .addCase(getArtist.rejected, (state) => {
         state.isLoading = false;
         toast.error('Error occurred', toastifyOptions);
       });

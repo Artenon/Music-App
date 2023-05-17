@@ -122,8 +122,8 @@ components:
           items:
             $ref: '#/components/schemas/Track'
         artist:
-          $ref: '#/components/schemas/Artist'
-    Artist:
+          $ref: '#/components/schemas/ArtistInfo'
+    ArtistInfo:
       type: object
       properties:
         id: 
@@ -199,7 +199,7 @@ components:
               type: 
                 type: string
               artist:
-                $ref: '#/components/schemas/Artist'
+                $ref: '#/components/schemas/ArtistInfo'
               album:
                 type: object
                 properties:
@@ -244,7 +244,7 @@ components:
               items:
                 $ref: '#/components/schemas/Track'
             artist:
-              $ref: '#/components/schemas/Artist'
+              $ref: '#/components/schemas/ArtistInfo'
     FavoritesResponse:
       type: object
       properties:
@@ -252,3 +252,95 @@ components:
           type: string
         favorites:
           $ref: '#/components/schemas/Favorites'
+    ArtistResponse:
+      type: object
+      properties:
+        data: 
+          $ref: '#/components/schemas/ArtistData'
+        total: 
+          type: number
+        next: 
+          type: string
+        artist: 
+          $ref: '#/components/schemas/Artist'
+    Artist:
+      type: object
+      properties:
+        id: 
+          type: number
+        name: 
+          type: string
+        link: 
+          type: string
+        share: 
+          type: string
+        picture: 
+          type: string
+        picture_small: 
+          type: string
+        picture_medium: 
+          type: string
+        picture_big: 
+          type: string
+        picture_xl: 
+          type: string
+        nb_album: 
+          type: number
+        nb_fan: 
+          type: number
+        radio: 
+          type: boolean
+        tracklist: 
+          type: string
+        type: 
+          type: string
+        role: 
+          type: string
+    ArtistData:
+      type: object
+      properties:
+        id: 
+          type: number
+        readable: 
+          type: boolean
+        title: 
+          type: string
+        title_short: 
+          type: string
+        title_version: 
+          type: string
+        link: 
+          type: string
+        duration: 
+          type: number
+        rank: 
+          type: number
+        explicit_lyrics: 
+          type: boolean
+        explicit_content_lyrics: 
+          type: number
+        explicit_content_cover: 
+          type: number
+        preview: 
+          type: string
+        contributors: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Artist'
+        md5_image: 
+          type: string
+        artist: 
+          type: object
+          properties:
+            id: 
+              type: number
+            name: 
+              type: string
+            tracklist: 
+              type: string
+            type: 
+              type: string
+        album: 
+          $ref: '#/components/schemas/Album'
+        type: 
+          type: string
