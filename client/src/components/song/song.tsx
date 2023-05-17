@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react";
-import { HiPlay, HiPause } from "react-icons/hi";
-import { TrackData, AlbumData } from "../../types/music.types";
+import { useEffect, useState } from "react";
+import { HiPause, HiPlay } from "react-icons/hi";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying, getQueue } from "../../redux/track/selectors";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import actions from "../../redux/track/track-slice";
+import { TrackData } from "../../types/music.types";
 
-const { changeCurrentTrack, changeIsPlaying, changePosition, changeQueue } = actions;
-
-type AlbumSongProps = {
+type FavoriteSongProps = {
   track: TrackData;
   index: number;
-  album: AlbumData;
-}
+  queuePayload: TrackData[];
+};
 
-export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element => {
+const { changeIsPlaying, changeCurrentTrack, changePosition, changeQueue } = actions;
+
+export const Song = ({track, index, queuePayload}: FavoriteSongProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const isPlaying = useAppSelector(getIsPlaying);
   const currentTrack = useAppSelector(getCurrentTrack);
+  const isPlaying = useAppSelector(getIsPlaying);
   const queue = useAppSelector(getQueue);
   const isCurrentTrack = currentTrack?.id === track.id;
 
@@ -31,20 +31,11 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
       dispatch(changeIsPlaying(false));
       setIsActive(false);
     } else {
-      if (album.tracks.data !== queue) {
-        dispatch(changeQueue(album.tracks.data));
+      if (queuePayload !== queue) {
+        dispatch(changeQueue(queuePayload));
       };
 
-      dispatch(changeCurrentTrack({
-        ...track,
-        artist: album.artist,
-        album: {
-          id: album.id,
-          title: album.title,
-          cover_small: album.cover_small,
-          cover_medium: album.cover_medium
-        }
-      }));
+      dispatch(changeCurrentTrack({ ...track }));
       dispatch(changeIsPlaying(true));
       dispatch(changePosition(index));
       setIsActive(true);
@@ -60,12 +51,12 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
   }, [isCurrentTrack, isPlaying]);
 
   return (
-    <div className="flex py-1">
+    <div className="flex py-1 text-white">
       <div className={`
         flex group/song 
-        hover:bg-white hover:text-black hover:font-bold hover:shadow-lg hover:pl-1
-        transition-all cursor-pointer pr-2 rounded-lg
-        ${isActive && "bg-white text-black font-bold shadow-lg pl-1"}`}
+        hover:bg-white hover:text-black hover:font-bold hover:shadow-lg hover:pl-2
+        transition-all cursor-pointer pr-2 p-1 rounded-lg
+        ${isActive && "bg-white text-black font-bold shadow-lg pl-2"}`}
         onClick={handleClick}
       >
         <div className={`group-hover/song:scale-150 w-[20px] flex justify-end items-center ${isActive && "scale-150"}`}>
@@ -78,9 +69,14 @@ export const AlbumSong = ({track, index, album}: AlbumSongProps): JSX.Element =>
             }
           </div>
         </div>
-        <div className="ml-4">
-          <p className="text-lg">{track.title}</p>
-          <p className={`${isActive ? "text-black/60" : "text-gray-300/60"} group-hover/song:text-black/60`}>{album.artist.name}</p>
+        <div className="flex ml-4 items-center">
+          <img className={`w-[56px] h-[56px] mr-2 rounded-md transition-all group-hover/song:shadow-cover ${isActive && "shadow-cover"}`} src={track.album.cover_small} alt="cover" />
+          <div>
+            <p className="text-lg">{track.title}</p>
+            <p className={`${isActive ? "text-black/60" : "text-gray-300/60"} group-hover/song:text-black/60`}>
+              {track.artist.name}
+            </p>
+          </div>
         </div>
       </div>
     </div>

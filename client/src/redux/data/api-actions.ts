@@ -2,12 +2,10 @@ import { AxiosInstance } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../types/store.types";
 import { SearchDataResponse, AlbumDataResponse } from "../../types/server.types";
-import { SongData } from "../../../../shared/types";
 import { NameSpace, APIRoute } from "../../const";
-import { AlbumData } from "../../types/album.types";
-import { ArtistData } from "../../types/artist.types";
+import { AlbumData, ArtistData, TrackData } from "../../types/music.types";
 
-export const searchAction = createAsyncThunk<SongData[], string, {
+export const searchAction = createAsyncThunk<TrackData[], string, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance

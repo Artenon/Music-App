@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { searchAction, getAlbum, getArtist, getArtistTotal } from "./api-actions";
 import { NameSpace, toastifyOptions } from "../../const";
-import { SongData } from "../../../../shared/types";
-import { AlbumData } from "../../types/album.types";
-import { ArtistData } from "../../types/artist.types";
+import { AlbumData, ArtistData, TrackData } from "../../types/music.types";
 
 const initialState: {
   isLoading: boolean;
-  searchData: SongData[];
+  searchData: TrackData[];
   albumData: AlbumData | null;
   artistData: ArtistData | null;
 } = {

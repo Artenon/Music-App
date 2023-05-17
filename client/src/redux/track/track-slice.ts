@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NameSpace, TabsFavorites } from "../../const";
-import { SongData } from "../../../../shared/types";
+import { TrackData } from "../../types/music.types";
 
 const initialState: {
-  currentTrack: SongData | null;
+  currentTrack: TrackData | null;
   isPlaying: boolean;
   position: number;
   autoPlay: boolean;
-  queue: SongData[];
+  queue: TrackData[];
   tab: TabsFavorites;
 } = {
   currentTrack: null,

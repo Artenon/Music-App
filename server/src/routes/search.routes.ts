@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
 import axios, { AxiosRequestConfig } from "axios";
-import { SongData } from "../../../shared/types";
 
 const router = Router();
 

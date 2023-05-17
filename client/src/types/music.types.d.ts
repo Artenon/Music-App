@@ -29,18 +29,6 @@ export type AlbumData = {
   tracks: Tracks;
 };
 
-type Artist = {
-  id: number;
-  name: string;
-  picture: string;
-  picture_small: string;
-  picture_medium: string;
-  picture_big: string;
-  picture_xl: string;
-  tracklist: string;
-  type: string;
-};
-
 type Contributor = {
   id: number;
   name: string;
@@ -68,13 +56,6 @@ type Genres = {
   ];
 };
 
-type ArtistInTracks = {
-  id: number;
-  name: string;
-  type: string;
-  tracklist: string;
-};
-
 type Tracks = {
   data: TrackData[];
 };
@@ -93,7 +74,7 @@ export type TrackData = {
   explicit_content_cover: number;
   preview: string;
   md5_image: string;
-  artist: ArtistInTracks;
+  artist: ArtistShortInfo;
   album: Album;
   type: string;
 };
@@ -110,3 +91,36 @@ type Album = {
   tracklist: string;
   type: string;
 };
+
+export type ArtistData = {
+  data: TrackData[];
+  total: number;
+  next?: string;
+  artist?: Artist;
+};
+
+type Artist = {
+  id: number;
+  name: string;
+  link: string;
+  share: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  nb_album?: number;
+  nb_fan?: number;
+  radio: boolean;
+  tracklist: string;
+  type: string;
+  role?: string;
+};
+
+type ArtistShortInfo = {
+  id: number;
+  name: string;
+  tracklist: string;
+  type: string;
+};
+

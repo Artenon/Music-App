@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiPlay, HiPause } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
-import { SongData } from "../../../../shared/types";
+import { TrackData } from "../../types/music.types";
 import actions from "../../redux/track/track-slice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCurrentTrack, getIsPlaying, getQueue } from "../../redux/track/selectors";
@@ -10,7 +10,7 @@ import { getSearchData } from "../../redux/data/selectors";
 import { AppRoute } from "../../const";
 
 type CardProps = {
-  item: SongData;
+  item: TrackData;
   index: number;
 };
 
@@ -101,7 +101,7 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
 };
 
 type CardsProps = {
-  data: SongData[];
+  data: TrackData[];
 };
 
 export const Cards = ({data}: CardsProps): JSX.Element => (

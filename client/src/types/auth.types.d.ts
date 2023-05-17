@@ -1,5 +1,4 @@
-import { AlbumData } from "./album.types";
-import { SongData } from "../../../shared/types";
+import { AlbumData, TrackData } from "./music.types";
 
 export type User = {
   email: string,
@@ -9,6 +8,6 @@ export type User = {
 };
 
 export type Favorites = {
-  tracks: SongData[];
+  tracks: TrackData[];
   albums: AlbumData[];
 };

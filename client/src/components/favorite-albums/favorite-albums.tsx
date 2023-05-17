@@ -3,7 +3,7 @@ import { HiArrowCircleRight } from "react-icons/hi";
 import { BsFillExplicitFill } from "react-icons/bs";
 import { useAppSelector } from "../../hooks/hooks";
 import { getFavorites } from "../../redux/user/selectors";
-import { AlbumData } from "../../types/album.types";
+import { AlbumData } from "../../types/music.types";
 import { AppRoute } from "../../const";
 
 type FavoriteAlbumProps = {

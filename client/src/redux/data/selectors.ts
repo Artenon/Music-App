@@ -1,11 +1,9 @@
 import { RootState } from "../../types/store.types";
-import { SongData } from "../../../../shared/types";
-import { AlbumData } from "../../types/album.types";
-import { ArtistData } from "../../types/artist.types";
+import { AlbumData, ArtistData, TrackData } from "../../types/music.types";
 
 export const getIsLoading = (state: RootState): boolean => state.DATA.isLoading;
 
-export const getSearchData = (state: RootState): SongData[] => state.DATA.searchData;
+export const getSearchData = (state: RootState): TrackData[] => state.DATA.searchData;
 
 export const getAlbumData = (state: RootState): AlbumData | null => state.DATA.albumData;
 
