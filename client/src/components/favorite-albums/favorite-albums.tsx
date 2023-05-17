@@ -46,7 +46,14 @@ const FavoriteAlbum = ({item}: FavoriteAlbumProps): JSX.Element => {
           <Link to={`${AppRoute.Album}/${item.id}`}>{item.title}</Link>
         </div>
       </div>
-      <div className="artist text-white/60 truncate">{item.artist.name}</div>
+      <div className="truncate">
+        <Link
+          to={`${AppRoute.Artist}/${item.artist.id}`} 
+          className="text-white/60 hover:underline"
+        >
+          {item.artist.name}
+        </Link>
+      </div>
     </div>
   );
 };

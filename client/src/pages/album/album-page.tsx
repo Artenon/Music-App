@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { BiCopyright } from "react-icons/bi";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { ColorRing } from "react-loader-spinner";
@@ -10,7 +10,7 @@ import { getAlbum } from "../../redux/data/api-actions";
 import { addFavoriteAlbum, removeFavoriteAlbum } from "../../redux/user/api-actions";
 import { Spinner } from "../../components/spinner/spinner";
 import { AlbumSong } from "../../components/album-song/album-song";
-import { AuthStatus } from "../../const";
+import { AuthStatus, AppRoute } from "../../const";
 
 export const AlbumPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -70,9 +70,11 @@ export const AlbumPage = (): JSX.Element => {
           <div className="uppercase">{albumData.record_type}</div>
           <div className="text-6xl my-4">{albumData.title}</div>
           <div className="flex items-center">
-            <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
-            <div className="ml-2 flex items-center">
-              {albumData.artist.name}
+            <div className="flex items-center">
+              <Link to={`${AppRoute.Artist}/${albumData.artist.id}`} className="flex items-center justify-center gap-2 hover:underline">
+                <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
+                {albumData.artist.name}
+              </Link>
               <span className="text-white mx-1">&#183;</span>
               {albumData.release_date.split('-')[0]}
               <span className="text-white mx-1">&#183;</span>

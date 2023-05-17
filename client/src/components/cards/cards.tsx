@@ -95,7 +95,14 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
           <Link to={`${AppRoute.Album}/${item.album.id}`}>{item.title_short}</Link>
         </div>
       </div>
-      <div className="artist text-white/60 truncate">{item.artist.name}</div>
+      <div className="truncate">
+        <Link 
+          className="text-white/60 hover:underline"
+          to={`${AppRoute.Artist}/${item.artist.id}`}
+        >
+          {item.artist.name}
+        </Link>
+      </div>
     </div>
   );
 };
