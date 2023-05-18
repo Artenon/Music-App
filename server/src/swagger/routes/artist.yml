@@ -10,6 +10,11 @@
       schema:
         type: integer
       description: Artist's ID
+    - in: query
+      name: total
+      schems:
+        type: integer
+      description: Total amount of tracks (with starting index = 25)
     responses:
       200:
         description: Success

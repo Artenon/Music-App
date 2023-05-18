@@ -6,6 +6,7 @@
     parameters:
     - in: query
       name: q
+      required: true
       schema:
         type: string
       description: Search value
