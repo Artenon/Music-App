@@ -32,7 +32,7 @@ router
 
       if (total) {
 
-        await axios.get(`${process.env.API_URL}/artist/${artistID}/top?limit=${total}`)
+        await axios.get(`${process.env.API_URL}/artist/${artistID}/top?limit=${total}&index=25`)
           .then(response => {
             if (response.data.error) {
               return res.status(500).json({ message: response.data.error.message });

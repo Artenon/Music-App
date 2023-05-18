@@ -44,7 +44,7 @@ export const getArtist = createAsyncThunk<ArtistData, string, {
   }
 );
 
-export const getArtistTotal = createAsyncThunk<ArtistData, {artistID: string, total: string}, {
+export const getArtistTotal = createAsyncThunk<ArtistData, {artistID: string, total: number}, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance

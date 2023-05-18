@@ -70,43 +70,41 @@ export const AlbumPage = (): JSX.Element => {
           <div className="uppercase">{albumData.record_type}</div>
           <div className="text-6xl my-4">{albumData.title}</div>
           <div className="flex items-center">
-            <div className="flex items-center">
-              <Link to={`${AppRoute.Artist}/${albumData.artist.id}`} className="flex items-center justify-center gap-2 hover:underline">
-                <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
-                {albumData.artist.name}
-              </Link>
-              <span className="text-white mx-1">&#183;</span>
-              {albumData.release_date.split('-')[0]}
-              <span className="text-white mx-1">&#183;</span>
-              <div className="flex gap-2">
-                {albumData.genres.data.map(genre => (
-                  <div key={genre.id} className="bg-white rounded-lg text-black p-1">{genre.name}</div>
-                ))}
-              </div>
-              {
-                authStatus === AuthStatus.Authorized
-                ?
-                <div className="flex items-center">
-                  <span className="text-white mx-1">&#183;</span>
-                  <div className="cursor-pointer text-3xl">
-                    {
-                      isAddingFavAlbum
-                      ?
-                        <ColorRing
-                          visible={true}
-                          height="30"
-                          width="30"
-                          colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
-                        />
-                      : isLiked
-                        ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
-                        : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
-                    }
-                  </div>
-                </div>
-                : null
-              }
+            <Link to={`${AppRoute.Artist}/${albumData.artist.id}`} className="flex items-center justify-center gap-2 hover:underline">
+              <img src={albumData.artist.picture_small} className="rounded-full w-[56px] h-[56px]" alt="artist_cover" />
+              {albumData.artist.name}
+            </Link>
+            <span className="text-white mx-1">&#183;</span>
+            {albumData.release_date.split('-')[0]}
+            <span className="text-white mx-1">&#183;</span>
+            <div className="flex gap-2">
+              {albumData.genres.data.map(genre => (
+                <div key={genre.id} className="bg-white rounded-lg text-black p-1">{genre.name}</div>
+              ))}
             </div>
+            {
+              authStatus === AuthStatus.Authorized
+              ?
+              <div className="flex items-center">
+                <span className="text-white mx-1">&#183;</span>
+                <div className="cursor-pointer text-3xl">
+                  {
+                    isAddingFavAlbum
+                    ?
+                      <ColorRing
+                        visible={true}
+                        height="30"
+                        width="30"
+                        colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
+                      />
+                    : isLiked
+                      ? <AiFillHeart onClick={unlikeHandler} className="text-rose-600 drop-shadow-heart animate-heartIn" />
+                      : <AiOutlineHeart onClick={likeHandler} className="animate-heartOut" />
+                  }
+                </div>
+              </div>
+              : null
+            }
           </div>
         </div>
       </div>
