@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  server:
+    build: server/
+    container_name: server-docker
+    command: npm start
+    ports:
+      - 5000:5000
+  client:
+    build: client/
+    container_name: client-docker
+    depends_on:
+      - server
+    command: npm start
+    ports:
+      - 3000:3000

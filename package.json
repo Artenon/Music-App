@@ -1,7 +1,10 @@
 {
   "name": "music-app",
   "version": "1.0.0",
-  "workspaces": ["server/*", "client/*"],
+  "workspaces": [
+    "server/*",
+    "client/*"
+  ],
   "description": "",
   "main": "server/build/app.js",
   "scripts": {

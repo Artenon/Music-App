@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import axios from "axios";
-import { Artist } from "../../../shared/types";
+import { Artist } from "../types";
 
 const router = Router();
 
