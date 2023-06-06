@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { NameSpace, toastifyOptions, AuthStatus } from "../../const";
 import {
@@ -11,7 +11,7 @@ import {
   addFavoriteAlbum,
   removeFavoriteAlbum
 } from "./api-actions";
-import { saveToken, removeToken } from "../../service/user-storage";
+import { saveToken, removeToken, getTheme, saveTheme } from "../../service/user-storage";
 import { Favorites } from "../../types/auth.types";
 
 const initialState: {
@@ -22,6 +22,7 @@ const initialState: {
   authStatus: AuthStatus;
   username: string;
   favorites: Favorites;
+  theme: string | null;
 } = {
   isAuthLoading: false,
   isLoginLoading: false,
@@ -33,7 +34,10 @@ const initialState: {
     tracks: [],
     albums: []
   },
+  theme: getTheme(),
 };
+
+export const changeTheme = createAction<string>('USER/changeTheme');
 
 export const userSlice = createSlice({
   name: NameSpace.USER,
@@ -132,6 +136,10 @@ export const userSlice = createSlice({
       })
       .addCase(removeFavoriteAlbum.rejected, (state) => {
         state.isAddingFavAlbum = false;
-      });
+      })
+      .addCase(changeTheme, (state, action) => {
+        state.theme = action.payload;
+        saveTheme(action.payload);
+      }); 
   }
 });

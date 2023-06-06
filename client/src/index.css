@@ -11,7 +11,7 @@
 }
 
 body {
-  background-image: var(--gradient);
+  background: var(--gradient);
   background-attachment: fixed;
 }
 

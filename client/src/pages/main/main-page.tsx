@@ -4,13 +4,11 @@ import { Search } from "../../components/search/search";
 import { Cards } from "../../components/cards/cards";
 import { Spinner } from "../../components/spinner/spinner";
 import { Account } from "../../components/account/account";
+import { Theme } from "../../components/theme/theme";
 
 export const MainPage = (): JSX.Element => {
   const searchData = useAppSelector(getSearchData);
   const isLoading = useAppSelector(getIsLoading);
-
-  /* const body = document.querySelector('body');
-  body?.style.setProperty('--gradient', 'linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99)) */
 
   return (
     <div className="h-screen">
@@ -22,6 +20,7 @@ export const MainPage = (): JSX.Element => {
           ? <Spinner />
           : <Cards data={searchData} />
         }
+        <Theme />
       </div>
     </div>
   );

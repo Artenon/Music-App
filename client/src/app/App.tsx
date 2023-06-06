@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AppRoute, AuthStatus } from "../const";
 import { MainPage } from "../pages/main/main-page";
@@ -7,8 +8,17 @@ import { Player } from "../components/player/player";
 import { PrivateRoute } from "../components/private-route/private-route";
 import { FavoritesPage } from "../pages/favorites/favorites-page";
 import { ArtistPage } from "../pages/artist/artist-page";
+import { getTheme } from "../service/user-storage";
 
 function App() {
+  useEffect(() => {
+    const theme = getTheme();
+    if (theme !== null) {
+      const body = document.querySelector('body');
+      body?.style.setProperty('--gradient', theme);
+    };
+  });
+
   return (
     <BrowserRouter>
       <div className="App">

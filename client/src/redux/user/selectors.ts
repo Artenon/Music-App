@@ -15,3 +15,5 @@ export const getIsLoginLoading = (state: RootState): boolean => state.USER.isLog
 export const getIsAddingFavTrack = (state: RootState): boolean => state.USER.isAddingFavTrack;
 
 export const getIsAddingFavAlbum = (state: RootState): boolean => state.USER.isAddingFavAlbum;
+
+export const getTheme = (state: RootState): string | null => state.USER.theme;

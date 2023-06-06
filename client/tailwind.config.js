@@ -22,6 +22,7 @@ module.exports = {
         heartOut: 'animateHeartOut 0.2s ease-in-out',
         heart: 'animateHeart 5s infinite',
         floatIn: 'floatIn 0.15s ease-in-out',
+        floatInTheme: 'floatIn 0.2s ease-in-out',
         more: 'more 1.25s infinite',
       },
       keyframes: {

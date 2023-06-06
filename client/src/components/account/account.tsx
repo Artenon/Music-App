@@ -79,8 +79,8 @@ export const Account = (): JSX.Element => {
       >
         {
           isOpen
-          ? <RxCross2 className="animate-floatIn text-gray-800 opacity-100 scale-100" />
-          : <CgMenuGridO className="animate-floatIn opacity-100 scale-100" />
+          ? <RxCross2 className="animate-floatIn text-gray-800" />
+          : <CgMenuGridO className="animate-floatIn" />
         }
       </div>
       <div className={`
