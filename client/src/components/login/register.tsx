@@ -149,7 +149,7 @@ export const Register = (): JSX.Element => {
                   width="30"
                   ariaLabel="blocks-loading"
                   wrapperStyle={{"margin": "0 auto"}}
-                  colors={['#B9BBB6', '#B9BBB6', '#B9BBB6', '#B9BBB6', '#B9BBB6']}
+                  colors={['#121212', '#121212', '#121212', '#121212', '#121212']}
                 />
               </div>
             : "Create Account"

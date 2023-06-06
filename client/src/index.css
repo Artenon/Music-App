@@ -23,25 +23,28 @@ a {
 /* LOGIN_FORM */
 
 .login {
+  --light: #d4d4d4;
+  --super-light: #ebebeb;
+  --dark: rgba(0, 0, 0, 0.8);
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: consolas;
-  color: #444;
+  color: var(--light);
 }
 
 .login .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(#c2c2c2, #8f8f8f);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   padding: 50px;
-  max-width: 400px;/* 
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3),
-    0px 0px 30px rgba(255, 255, 255, 0.3),
-    0px 0px 80px rgba(255, 255, 255, 0.3); */
+  max-width: 400px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3),
+    0px 0px 30px rgba(0, 0, 0, 0.3),
+    0px 0px 80px rgba(0, 0, 0, 0.3);
 }
 
 .login__header {
@@ -54,8 +57,8 @@ a {
   width: 80px;
   height: 80px;
   margin-bottom: 10px;
-  color: #d4d4d4;
-  background-color: #444;
+  color: var(--dark);
+  background-color: var(--light);
   font-size: 2em;
   display: flex;
   align-items: center;
@@ -83,7 +86,7 @@ a {
   background: transparent;
   box-shadow: none;
   border: none;
-  border-bottom: 3px solid #444;
+  border-bottom: 3px solid var(--super-light);
   outline: none;
   transition: border-bottom .3s;
 }
@@ -97,7 +100,7 @@ a {
 }
 
 .login .inputBox.empty input {
-  border-bottom: 3px solid #444;
+  border-bottom: 3px solid var(--super-light);
 }
 
 .login .inputBox .icon {
@@ -120,44 +123,48 @@ a {
 .login .inputBox input:valid~label {
   transform: translateY(-20px);
   font-size: 1em;
-  color: #d4d4d4;
+  color: var(--dark);
   border-radius: 5px;
   font-weight: bold;
-  background-color: #444;
+  background-color: var(--super-light);
   padding: 0 5px;
 }
 
 .login .inputBox.equal input:focus~label,
 .login .inputBox.equal input:valid~label {
   background-color: #0b7d20;
+  color: var(--light);
 }
 
 .login .inputBox.not-equal input:focus~label,
 .login .inputBox.not-equal input:valid~label {
   background-color: #7d0b0b;
+  color: var(--light);
 }
 
 .login .inputBox.empty input:focus~label,
 .login .inputBox.empty input:valid~label {
-  background-color: #444;
+  background-color: var(--super-light);
+  color: var(--dark);
 }
 
 .login .inputBox .hint {
   font-weight: bold;
-  color: #7d0b0b;
+  color: var(--super-light);
 }
 
 .login__button {
   width: 100%;
-  color: #d4d4d4;
-  background-color: #444;
+  color: var(--dark);
+  background-color: var(--light);
   border: none;
   font-size: 1.25em;
+  font-weight: bold;
   margin-top: 30px;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.2),
-    inset 5px 5px 15px rgba(255, 255, 255, 0.1);
+  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.4),
+    inset 5px 5px 15px rgba(255, 255, 255, 0.4);
   transition: .2s;
 }
 
@@ -166,12 +173,12 @@ a {
 }
 
 .login__button:active {
-  box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2),
-    inset -5px -5px 15px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.4),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.4);
 }
 
 .login .signup_link {
-  color: #444;
+  color: var(--light);
   text-decoration: none;
   display: flex;
   align-items: center;

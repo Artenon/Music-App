@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IoIosColorFill } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { BsCheckLg } from "react-icons/bs";
@@ -24,32 +24,32 @@ export const Theme = (): JSX.Element => {
 
   const themes = [
     {
-      id: 100,
+      id: 0,
       theme: "bg-gradient-to-t from-gray-600 to-gray-800",
-      css: "linear-gradient(to top, #4B5563 0%, #112227 100%)"
+      css: "linear-gradient(to top, #4B5563 0%, #111827 100%)"
     },
     {
-      id: 101,
+      id: 1,
       theme: "bg-gradient-to-t from-red-700 to-red-900",
       css: "linear-gradient(to top, #700000 0%, #260000 100%)"
     },
     {
-      id: 102,
+      id: 2,
       theme: "bg-gradient-to-t from-sky-700 to-sky-900",
       css: "linear-gradient(to top, #00324e 0%, #00131e 100%)"
     },
     {
-      id: 103,
+      id: 3,
       theme: "bg-gradient-to-t from-green-800 to-green-900",
       css: "linear-gradient(to top, #004319 0%, #001709 100%)"
     },
     {
-      id: 104,
+      id: 4,
       theme: "bg-gradient-to-t from-gray-800 to-black",
       css: "linear-gradient(to top, #1f2937 0%, #000 100%)"
     },
     {
-      id: 105,
+      id: 5,
       theme: "bg-gradient-to-t from-red-400 to-rose-900",
       css: "linear-gradient(to top, #CA7968 0%, #2b0012 100%)"
     },
@@ -81,7 +81,7 @@ export const Theme = (): JSX.Element => {
         `}
       >
         {
-          themes.map(theme => (
+          themes.map((theme, index) => (
             <div 
               key={theme.id}
               className={`
@@ -91,8 +91,8 @@ export const Theme = (): JSX.Element => {
               `}
               onClick={() => themeHandler(theme.css)}
             >
-              {
-                theme.css === currentTheme
+              { 
+                (theme.css === currentTheme || (index === 0 && currentTheme === null))
                 && <BsCheckLg className="text-white text-xl bg-black/30 rounded-sm" />
               } 
             </div>

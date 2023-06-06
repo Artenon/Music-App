@@ -67,7 +67,7 @@ export const Login = (): JSX.Element => {
                   height="30"
                   width="30"
                   wrapperStyle={{"margin": "0 auto"}}
-                  colors={['#B9BBB6', '#B9BBB6', '#B9BBB6', '#B9BBB6', '#B9BBB6']}
+                  colors={['#121212', '#121212', '#121212', '#121212', '#121212']}
                 />
               </div>
             : "Login"
