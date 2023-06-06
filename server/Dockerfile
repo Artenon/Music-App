@@ -2,7 +2,9 @@ FROM node
 
 WORKDIR /app/server
 
-COPY package.json .
-RUN npm install
+COPY package*.json .
+RUN npm ci
 
 COPY . .
+
+CMD [ "npm", "start" ]

@@ -2,9 +2,11 @@ FROM node
 
 WORKDIR /app/client
 
-COPY package.json .
-RUN npm install
+COPY package*.json .
+RUN npm ci
 
 COPY . .
 
 RUN npm run build
+
+CMD [ "npm", "start" ]
