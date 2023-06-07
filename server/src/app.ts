@@ -11,6 +11,7 @@ import albumRoutes from "./routes/album.routes.js";
 import favoritesRoutes from "./routes/favorites.route.js";
 import artistRoutes from "./routes/artist.routes.js";
 import themeRoutes from "./routes/theme.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const __dirname = path.resolve();
 const app = express();
@@ -29,6 +30,7 @@ app.use(albumRoutes);
 app.use(favoritesRoutes);
 app.use(artistRoutes);
 app.use(themeRoutes);
+app.use(userRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, '../../client', 'build')));

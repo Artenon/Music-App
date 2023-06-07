@@ -28,6 +28,13 @@ components:
         password:
           type: string
           default: password
+    Username:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
     Favorites:
       type: object
       properties:

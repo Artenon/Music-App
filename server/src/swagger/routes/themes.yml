@@ -1,6 +1,6 @@
 /api/themes:
   get:
-    description: Themes
+    description: Get All themes
     tags:
       - Themes
     responses:

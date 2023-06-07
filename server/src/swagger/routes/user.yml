@@ -1,0 +1,30 @@
+/api/user:
+  put:
+    description: Update username
+    tags:
+      - User
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Username'
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      401:
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
