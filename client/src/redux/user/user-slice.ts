@@ -21,6 +21,7 @@ const initialState: {
   isAddingFavTrack: boolean;
   authStatus: AuthStatus;
   username: string;
+  email: string;
   favorites: Favorites;
   theme: string | null;
 } = {
@@ -30,6 +31,7 @@ const initialState: {
   isAddingFavTrack: false,
   authStatus: AuthStatus.Unauthorized,
   username: '',
+  email: '',
   favorites: {
     tracks: [],
     albums: []
@@ -90,6 +92,7 @@ export const userSlice = createSlice({
       .addCase(getAuthStatus.fulfilled, (state, action) => {
         state.authStatus = action.payload.message;
         state.username = action.payload.username;
+        state.email = action.payload.email;
         state.favorites = action.payload.favorites;
         state.isAuthLoading = false;
       })

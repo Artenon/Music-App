@@ -49,7 +49,7 @@ router.route('/api/auth/login')
       if (req.user) {
         const user = await User.findById(req.user.userId);
         if (user) {
-          res.status(200).json({ message: 'Authorized', username: user.username, favorites: user.favorites });
+          res.status(200).json({ message: 'Authorized', username: user.username, email: user.email, favorites: user.favorites });
         };
       };
     } catch (error) {
@@ -91,7 +91,7 @@ router.route('/api/auth/login')
           { expiresIn: '1d' }
         );
         
-        res.status(201).json({ message: `Hi, ${user.username}!`, token, username: user.username, favorites: user.favorites});
+        res.status(201).json({ message: `Hi, ${user.username}!`, token, username: user.username, email: user.email, favorites: user.favorites});
 
       } catch (error) {
         res.status(500).json({ message: 'Something went wrong' });

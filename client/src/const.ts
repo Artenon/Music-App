@@ -17,6 +17,7 @@ export enum APIRoute {
   Artist = '/artist',
   Total = '?total=',
   Themes = '/themes',
+  User = '/user'
 };
 
 export enum AppRoute {
@@ -26,6 +27,7 @@ export enum AppRoute {
   Album = '/album',
   Favorites = '/favorites',
   Artist = '/artist',
+  User = '/user',
 };
 
 export const toastifyOptions: ToastOptions = {

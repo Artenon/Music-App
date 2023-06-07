@@ -9,6 +9,7 @@ import { PrivateRoute } from "../components/private-route/private-route";
 import { FavoritesPage } from "../pages/favorites/favorites-page";
 import { ArtistPage } from "../pages/artist/artist-page";
 import { getTheme } from "../service/user-storage";
+import { UserForm } from "../pages/user-form/user-form";
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,11 @@ function App() {
             </PrivateRoute>
           } />
           <Route path={`${AppRoute.Artist}/:artistID`} element={ <ArtistPage /> } />
+          <Route path={AppRoute.User} element={
+            <PrivateRoute requiredAuthStatus={AuthStatus.Authorized}>
+              <UserForm />
+            </PrivateRoute>
+          } />
         </Routes>
         <Player />
       </div>

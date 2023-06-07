@@ -13,12 +13,14 @@ export type LoginResponse = {
   token: string;
   userId: string;
   username: string;
+  email: string;
   favorites: Favorites;
 };
 
 export type AuthResponse = {
   message: AuthStatus;
   username: string;
+  email: string;
   favorites: Favorites;
 };
 
@@ -37,4 +39,4 @@ export type FavoriteResponse = {
 
 export type ThemesResponse = {
   data: Theme[];
-}
+};

@@ -59,7 +59,7 @@ export const Theme = (): JSX.Element => {
             <div 
               key={theme.id}
               className={`
-                w-[20px] h-[20px] bg-transparent rounded-sm cursor-pointer 
+                w-[20px] h-[20px] rounded-sm cursor-pointer
                 ${theme.theme} ${isOpen && "animate-floatInTheme"}
                 flex items-center justify-center
               `}

@@ -109,3 +109,16 @@ export const removeFavoriteAlbum = createAsyncThunk<FavoriteResponse, number, {
     return data;
   }
 );
+
+export const updateUser = createAsyncThunk<DefaultResponse, string, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance
+}
+>(
+  `${NameSpace.USER}/updateUser`,
+  async (username, {dispatch, extra: api}) => {
+    const {data} = await api.put<DefaultResponse>(APIRoute.User, {username});
+    return data;
+  }
+);

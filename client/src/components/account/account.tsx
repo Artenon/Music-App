@@ -18,7 +18,7 @@ const Login = (): JSX.Element => {
 };
 
 const Logout = ({userName}: {userName: string}): JSX.Element => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(); 
 
   const logoutHandler = () => {
     dispatch(logoutAction());
@@ -26,12 +26,15 @@ const Logout = ({userName}: {userName: string}): JSX.Element => {
 
   return (
     <div className="p-2">
-      <div className="
-        flex items-center gap-2 p-1 rounded-lg transition-all
-        hover:bg-white hover:text-gray-700
-      ">
+      <Link
+        to={AppRoute.User}
+        className="
+          flex items-center gap-2 p-1 rounded-lg transition-all
+          hover:bg-white hover:text-gray-700
+        "
+      >
         <FontAwesomeIcon icon={faUser} />{userName}
-      </div>
+      </Link>
       <div className="
         p-1 rounded-lg transition-all cursor-pointer
         hover:bg-white group/favorites
@@ -84,10 +87,8 @@ export const Account = (): JSX.Element => {
         }
       </div>
       <div className={`
-        absolute flex flex-col gap-1
-        text-white text-lg rounded-lg font-bold whitespace-nowrap
-        backdrop-blur-xl shadow-extra
-        transition-all
+        absolute text-white text-lg rounded-lg font-bold whitespace-nowrap
+        backdrop-blur-xl shadow-extra transition-all
         ${isOpen
           ? "scale-100 opacity-100 right-10 top-10"
           : "scale-50 opacity-0 right-0 top-4 invisible"}
