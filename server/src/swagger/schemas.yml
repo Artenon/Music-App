@@ -263,6 +263,13 @@ components:
           type: string
         artist: 
           $ref: '#/components/schemas/Artist'
+    ThemesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items: 
+            $ref: '#/components/schemas/Theme'
     Artist:
       type: object
       properties:
@@ -343,4 +350,13 @@ components:
         album: 
           $ref: '#/components/schemas/Album'
         type: 
+          type: string
+    Theme:
+      type: object
+      properties:
+        id:
+          type: number
+        theme:
+          type: string
+        css:
           type: string

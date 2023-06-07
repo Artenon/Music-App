@@ -1,0 +1,18 @@
+/api/themes:
+  get:
+    description: Themes
+    tags:
+      - Themes
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemesResponse'
+      500:
+        description: Internal error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultResponse'
