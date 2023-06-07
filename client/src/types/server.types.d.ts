@@ -1,6 +1,7 @@
 import { AuthStatus } from "../const";
 import { AlbumData, TrackData } from "./music.types";
 import { Favorites } from "./auth.types";
+import { Theme } from "./theme.types";
 
 export type DefaultResponse = {
   message: string;
@@ -33,3 +34,7 @@ export type FavoriteResponse = {
   message: string;
   favorites: Favorites;
 };
+
+export type ThemesResponse = {
+  data: Theme[];
+}

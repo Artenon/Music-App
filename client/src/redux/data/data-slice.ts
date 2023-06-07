@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { searchAction, getAlbum, getArtist, getArtistTotal } from "./api-actions";
+import { searchAction, getAlbum, getArtist, getArtistTotal, getThemesAction } from "./api-actions";
 import { NameSpace, toastifyOptions } from "../../const";
 import { AlbumData, ArtistData, TrackData } from "../../types/music.types";
+import { Theme } from "../../types/theme.types";
 
 const initialState: {
   isLoading: boolean;
@@ -10,12 +11,14 @@ const initialState: {
   searchData: TrackData[];
   albumData: AlbumData | null;
   artistData: ArtistData | null;
+  themes: Theme[];
 } = {
   isLoading: false,
   isMoreLoading: false,
   searchData: [],
   albumData: null,
   artistData: null,
+  themes: [],
 };
 
 export const dataSlice = createSlice({
@@ -70,6 +73,9 @@ export const dataSlice = createSlice({
       .addCase(getArtistTotal.rejected, (state) => {
         state.isMoreLoading = false;
         toast.error('Error occurred', toastifyOptions);
+      })
+      .addCase(getThemesAction.fulfilled, (state, action) => {
+        state.themes = action.payload;
       });
   }
 });

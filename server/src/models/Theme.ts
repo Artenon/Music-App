@@ -5,4 +5,4 @@ const themeSchema = new Schema({
   css: String
 });
 
-export default model('Theme', themeSchema, 'themes');
+export default model('Theme', themeSchema);

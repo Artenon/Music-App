@@ -16,6 +16,7 @@ export enum APIRoute {
   Track = '/track',
   Artist = '/artist',
   Total = '?total=',
+  Themes = '/themes',
 };
 
 export enum AppRoute {
