@@ -8,7 +8,7 @@ const router = Router();
 router.put('/api/user', authMiddleware, async (req: Request, res: Response) => {
   try {
     if (req.user) {
-      const {username} = req.body;
+      const {username, email} = req.body;
       const user = await User.findById(req.user.userId);
 
       if (!user) {
@@ -16,6 +16,7 @@ router.put('/api/user', authMiddleware, async (req: Request, res: Response) => {
       };
 
       user.username = username;
+      user.email = email;
       await user.save();
 
       res.status(200).json({ message: "OK" });
