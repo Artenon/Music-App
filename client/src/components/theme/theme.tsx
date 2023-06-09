@@ -58,9 +58,10 @@ export const Theme = (): JSX.Element => {
           themes.map((theme) => (
             <div 
               key={theme.id}
+              style={{background: theme.theme}}
               className={`
                 w-[20px] h-[20px] rounded-sm cursor-pointer
-                ${theme.theme} ${isOpen && "animate-floatInTheme"}
+                ${isOpen && "animate-floatInTheme"}
                 flex items-center justify-center
               `}
               onClick={() => themeHandler(theme.css)}
