@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent, useRef } from "react";
+import { useState, FormEvent, ChangeEvent, useRef, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ColorRing } from "react-loader-spinner";
@@ -68,10 +68,15 @@ export const Register = (): JSX.Element => {
     if (confirmRef.current) {
       if (isConfirmEqual && isEmailValid && isPasswordValid) {
         dispatch(registerAction(formData))
-        navigate(AppRoute.Login);
       };
     };
   };
+
+  useLayoutEffect(() => {
+    if (!isLoginLoading) {
+      navigate(AppRoute.Login);
+    }
+  }, [isLoginLoading, navigate]);
 
   return (
     <div className="container col-10">

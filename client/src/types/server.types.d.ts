@@ -40,3 +40,9 @@ export type FavoriteResponse = {
 export type ThemesResponse = {
   data: Theme[];
 };
+
+export type UserResponse = {
+  message: string;
+  email: string;
+  username: string;
+}

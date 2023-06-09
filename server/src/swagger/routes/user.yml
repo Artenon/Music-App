@@ -15,7 +15,7 @@
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DefaultResponse'
+              $ref: '#/components/schemas/UserResponse'
       401:
         description: Unauthorized
         content:

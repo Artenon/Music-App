@@ -1,15 +1,22 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ColorRing } from "react-loader-spinner";
 import { faUserLarge, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { useAppSelector } from "../../hooks/hooks";
-import { getEmail, getUsername } from "../../redux/user/selectors";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { getEmail, getUsername, getIsUserUpdating } from "../../redux/user/selectors";
+import { updateUser } from "../../redux/user/api-actions";
+import { AppRoute } from "../../const";
 
 const validEmailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export const UserForm = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const username = useAppSelector(getUsername);
   const email = useAppSelector(getEmail);
+  const isUserUpdating = useAppSelector(getIsUserUpdating);
 
   const [formData, setFormData] = useState<{email: string, username: string}>({ email, username });
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
@@ -30,9 +37,15 @@ export const UserForm = (): JSX.Element => {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid) {
-
+      dispatch(updateUser(formData));
     };
   };
+
+  useLayoutEffect(() => {
+    if (!isUserUpdating) {
+      navigate(AppRoute.Main);
+    }
+  }, [isUserUpdating, navigate]);
 
   return (
     <div className="login">
@@ -75,7 +88,7 @@ export const UserForm = (): JSX.Element => {
 
           <button type="submit" className="login__button">
             {
-              /* isLoginLoading
+              isUserUpdating
               ? <div>
                   <ColorRing
                     visible={true}
@@ -86,7 +99,7 @@ export const UserForm = (): JSX.Element => {
                     colors={['#121212', '#121212', '#121212', '#121212', '#121212']}
                   />
                 </div>
-              :  */"Update"
+              : "Update"
             }
           </button>
         </form>

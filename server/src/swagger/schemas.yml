@@ -65,6 +65,15 @@ components:
       properties:
         message:
           type: string
+    UserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
     Album:
       type: object
       properties:

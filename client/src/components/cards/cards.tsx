@@ -63,7 +63,7 @@ export const Card = ({item, index}: CardProps): JSX.Element => {
         rounded-lg
         p-4"
     >
-      <div className="relative ver cursor-pointer h-[218px]" onClick={playClickHandler}>
+      <div className="relative group/cover cursor-pointer h-[218px]" onClick={playClickHandler}>
         <img src={item.album.cover_medium}
           className={`rounded-md transition-all group-hover/cover:scale-95 ${isActive && "scale-95"}`} alt="cover"
         />

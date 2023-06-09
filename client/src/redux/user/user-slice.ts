@@ -9,7 +9,8 @@ import {
   addFavoriteTrack,
   removeFavoriteTrack,
   addFavoriteAlbum,
-  removeFavoriteAlbum
+  removeFavoriteAlbum,
+  updateUser
 } from "./api-actions";
 import { saveToken, removeToken, getTheme, saveTheme } from "../../service/user-storage";
 import { Favorites } from "../../types/auth.types";
@@ -19,6 +20,7 @@ const initialState: {
   isLoginLoading: boolean;
   isAddingFavAlbum: boolean;
   isAddingFavTrack: boolean;
+  isUserUpdating: boolean;
   authStatus: AuthStatus;
   username: string;
   email: string;
@@ -29,6 +31,7 @@ const initialState: {
   isLoginLoading: false,
   isAddingFavAlbum: false,
   isAddingFavTrack: false,
+  isUserUpdating: false,
   authStatus: AuthStatus.Unauthorized,
   username: '',
   email: '',
@@ -64,6 +67,7 @@ export const userSlice = createSlice({
         state.isLoginLoading = false;
         state.authStatus = AuthStatus.Authorized;
         state.username = action.payload.username;
+        state.email = action.payload.email;
         state.favorites = action.payload.favorites;
         toast.success(action.payload.message, toastifyOptions);
         Reflect.deleteProperty(action.payload, 'message');
@@ -143,6 +147,18 @@ export const userSlice = createSlice({
       .addCase(changeTheme, (state, action) => {
         state.theme = action.payload;
         saveTheme(action.payload);
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isUserUpdating = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isUserUpdating = false;
+        state.email = action.payload.email;
+        state.username = action.payload.username;
+        toast.success("Updated!", toastifyOptions);
+      })
+      .addCase(updateUser.rejected, (state) => {
+        state.isUserUpdating = false;
       }); 
   }
 });

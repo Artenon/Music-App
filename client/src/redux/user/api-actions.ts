@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../types/store.types";
-import { DefaultResponse, LoginResponse, AuthResponse, FavoriteResponse } from "../../types/server.types";
+import { DefaultResponse, LoginResponse, AuthResponse, FavoriteResponse, UserResponse } from "../../types/server.types";
 import { AlbumData, TrackData } from "../../types/music.types";
 import { User } from "../../types/auth.types";
 import { NameSpace, APIRoute } from "../../const";
@@ -110,15 +110,15 @@ export const removeFavoriteAlbum = createAsyncThunk<FavoriteResponse, number, {
   }
 );
 
-export const updateUser = createAsyncThunk<DefaultResponse, string, {
+export const updateUser = createAsyncThunk<UserResponse, {username: string, email: string}, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance
 }
 >(
   `${NameSpace.USER}/updateUser`,
-  async (username, {dispatch, extra: api}) => {
-    const {data} = await api.put<DefaultResponse>(APIRoute.User, {username});
+  async ({username, email}, {dispatch, extra: api}) => {
+    const {data} = await api.put<UserResponse>(APIRoute.User, {username, email});
     return data;
   }
 );

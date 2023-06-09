@@ -19,7 +19,7 @@ router.put('/api/user', authMiddleware, async (req: Request, res: Response) => {
       user.email = email;
       await user.save();
 
-      res.status(200).json({ message: "OK" });
+      res.status(200).json({ message: "OK", email: user.email, username: user.username });
     };
   } catch (error) {
     console.log(error);
