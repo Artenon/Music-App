@@ -8,6 +8,7 @@ import { Theme } from "../../types/theme.types";
 const initialState: {
   isLoading: boolean;
   isMoreLoading: boolean;
+  isThemesLoading: boolean;
   searchData: TrackData[];
   albumData: AlbumData | null;
   artistData: ArtistData | null;
@@ -15,6 +16,7 @@ const initialState: {
 } = {
   isLoading: false,
   isMoreLoading: false,
+  isThemesLoading: false,
   searchData: [],
   albumData: null,
   artistData: null,
@@ -74,8 +76,15 @@ export const dataSlice = createSlice({
         state.isMoreLoading = false;
         toast.error('Error occurred', toastifyOptions);
       })
+      .addCase(getThemesAction.pending, (state) => {
+        state.isThemesLoading = true;
+      })
       .addCase(getThemesAction.fulfilled, (state, action) => {
         state.themes = action.payload;
+        state.isThemesLoading = false;
+      })
+      .addCase(getThemesAction.rejected, (state) => {
+        state.isThemesLoading = false;
       });
   }
 });

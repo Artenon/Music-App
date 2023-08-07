@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { IoIosColorFill } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { BsCheckLg } from "react-icons/bs";
+import { ThreeDots } from "react-loader-spinner";
 import { getTheme } from "../../redux/user/selectors";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { changeTheme } from "../../redux/user/user-slice";
-import { getThemes } from "../../redux/data/selectors";
+import { getThemes, getIsThemesLoading } from "../../redux/data/selectors";
 import { getThemesAction } from "../../redux/data/api-actions";
 
 export const Theme = (): JSX.Element => {
@@ -14,6 +15,7 @@ export const Theme = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const currentTheme = useAppSelector(getTheme);
   const themes = useAppSelector(getThemes);
+  const isThemesLoading = useAppSelector(getIsThemesLoading);
 
   const openHandler = () => {
     setIsOpen(!isOpen);
@@ -55,23 +57,33 @@ export const Theme = (): JSX.Element => {
         `}
       >
         {
-          themes.map((theme) => (
-            <div 
-              key={theme.id}
-              style={{background: theme.theme}}
-              className={`
-                w-[20px] h-[20px] rounded-sm cursor-pointer
-                ${isOpen && "animate-floatInTheme"}
-                flex items-center justify-center
-              `}
-              onClick={() => themeHandler(theme.css)}
-            >
-              { 
-                (theme.css === currentTheme)
-                && <BsCheckLg className="text-white text-xl bg-black/30 rounded-sm" />
-              } 
-            </div>
-          ))
+          isThemesLoading
+          ? 
+            <ThreeDots
+              visible={true}
+              height="20"
+              width="30"
+              wrapperStyle={{"margin": "0 auto"}}
+              color="#fff"
+            />
+          :
+            themes.map((theme) => (
+              <div 
+                key={theme.id}
+                style={{background: theme.theme}}
+                className={`
+                  w-[20px] h-[20px] rounded-sm cursor-pointer
+                  ${isOpen && "animate-floatInTheme"}
+                  flex items-center justify-center
+                `}
+                onClick={() => themeHandler(theme.css)}
+              >
+                { 
+                  (theme.css === currentTheme)
+                  && <BsCheckLg className="text-white text-xl bg-black/30 rounded-sm" />
+                } 
+              </div>
+            ))
         }
       </div>
     </div>
